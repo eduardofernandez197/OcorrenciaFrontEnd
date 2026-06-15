@@ -56,3 +56,20 @@ div {
 .sidebar.fecha {
     display: none;
 }
+
+.newOcorrencia {
+    background-color: blue;
+    position: fixed;
+    top: 80px;
+    width: 100vw;
+    height: 100vh;
+    left: 200px;
+}
+
+.newOcorrencia.abre {
+    display: block;
+}
+
+.newOcorrencia.fecha {
+    display: none;
+}
