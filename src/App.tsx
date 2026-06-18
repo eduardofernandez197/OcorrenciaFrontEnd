@@ -41,20 +41,25 @@ function App() {
 
 
     return(
-        <main>
+        <main className='app'>
             <TopBar
                 sideBarAbre={sideBarAbre}
             />
-            <SideBar
-            sideBarOpen={sideBarOpen}
-            createOcorrencia={createOcorrencia}
-            />
-            <FormularioOcorrencia
-                newOcorrencia={newOcorrencia}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                register={register}
-            />
+            <div className="layout">
+                <SideBar
+                sideBarOpen={sideBarOpen}
+                createOcorrencia={createOcorrencia}
+                />
+                <div className="content">
+                    <FormularioOcorrencia
+                        newOcorrencia={newOcorrencia}
+                        handleSubmit={handleSubmit}
+                        onSubmit={onSubmit}
+                        register={register}
+                    />
+                </div>
+            </div>
+
         </main>       
     )
 }

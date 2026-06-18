@@ -9,10 +9,6 @@ html, body {
   height: 100%;
 }
 
-div {
-    
-}
-
 .topbar {
   background-color: #FF8300;
   height: 80px;
@@ -133,3 +129,20 @@ div {
     align-items: center;
 }
 
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #fff6e5;
+  overflow: auto;
+}
