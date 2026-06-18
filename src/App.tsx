@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import type { SubmitHandler } from 'react-hook-form';
 import './App.css'
 import axios from 'axios';
+import { TopBar } from './componentes/Components/TopBar';
+import { SideBar } from './componentes/Components/SideBar';
+import { FormularioOcorrencia } from './componentes/Components/FormularioOcorrencia';
 
 
 function App() {
@@ -44,31 +47,19 @@ function App() {
 
     return(
         <main>
-            <div className='topbar'>
-                <button onClick={sideBarAbre}>Menu</button>
-            </div>
-            <div className={sideBarOpen ? "sidebar abre" : "sidebar fecha"}>
-                <div>
-                    <button onClick={createOcorrencia}>Nova Ocorrência</button>
-                </div>
-            </div>
-            <div className={newOcorrencia ? "newOcorrencia abre" : "newOcorrencia fecha"}>
-                <form className='container' onSubmit={handleSubmit(onSubmit)}>
-                    <div className='titleOcorrencia'>
-                        <label htmlFor="titulo">Titulo</label>
-                        <input  className='titleOcorrencias' type="text" id='titulo' {...register("title")} placeholder='Titulo'/>
-                    </div>
-                    <div className='descriptionOcorrencia' >
-                        <textarea className='descriptionOcorrencias' {...register("description")} placeholder='Descreva o ocorrido'></textarea>                       
-                    </div>
-                    <div className='inputOcorrencia' >
-                        <input className='inputOcorrencias' type="file" multiple {...register("fotos")}/>
-                    </div>
-                    <div className='enviaOcorrencia' >
-                        <button type='submit'>Enviar</button>
-                    </div>
-                </form>
-            </div>
+            <TopBar
+                sideBarAbre={sideBarAbre}
+            />
+            <SideBar
+            sideBarOpen={sideBarOpen}
+            createOcorrencia={createOcorrencia}
+            />
+            <FormularioOcorrencia
+                newOcorrencia={newOcorrencia}
+                handleSubmit={handleSubmit}
+                onSubmit={onSubmit}
+                register={register}
+            />
         </main>       
     )
 }
