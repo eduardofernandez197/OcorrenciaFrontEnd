@@ -1,10 +1,5 @@
 import type { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
-
-type FormValues = {
-    title: string
-    description: string
-    fotos?: FileList
-}
+import type { FormValues } from '../../../Types/types';
 
 type FormularioOcorrenciaProps = {
     newOcorrencia: boolean;

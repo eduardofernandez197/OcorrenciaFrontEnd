@@ -6,15 +6,10 @@ import axios from 'axios';
 import { TopBar } from './componentes/Components/TopBar';
 import { SideBar } from './componentes/Components/SideBar';
 import { FormularioOcorrencia } from './componentes/Components/FormularioOcorrencia';
+import type { FormValues } from './Types/types';
 
 
 function App() {
-
-    type FormValues = {
-        title: string
-        description: string
-        fotos?: FileList
-    }
 
     const [sideBarOpen, setSideBarOpen] = useState<boolean>(false)
     const [newOcorrencia, setNewOcorrencia] = useState<boolean>(false)
