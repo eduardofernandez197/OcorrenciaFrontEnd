@@ -16,29 +16,39 @@ html, body {
   align-items: center;
   justify-content: flex-start;
   padding: 0 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .topbar button{
-  width: 80px;
-  height: 40px;
-  border-radius: 8px;
+  min-width: 90px;
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 5px;
   background-color: white;
   border: none;
+  color: #FF8300;
+  font-weight: 600;
+  cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.topbar button:hover {
+  background-color: #fff6e5;
+  transform: translateY(-1px);
 }
 
 .sidebar {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    height: 100vh;
     width: 200px;
+    flex-shrink: 0;
 
     background-color: #FF8300;
     border-right: 1px solid #ddd;
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.12);
 
     padding: 15px;
 }
@@ -51,18 +61,43 @@ html, body {
     display: none;
 }
 
+.sidebar button {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    color: #FF8300;
+    font-weight: 600;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar button:hover {
+    background-color: #fff6e5;
+    transform: translateY(-1px);
+}
+
 .newOcorrencia {
     background-color: #FFC16B;
-    position: fixed;
-    top: 80px;
-    width: 100vw;
-    height: 100vh;
-    left: 200px;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .container {
-    width: 100vw;
-    height: 100vh;    
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .newOcorrencia.abre {
@@ -74,63 +109,93 @@ html, body {
 }
 
 .titleOcorrencia {
-    height: 50px;
-    width: 400px;
-    padding: 15px;
-
-    margin-bottom: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .descriptionOcorrencia {
-    width: 500px;
-    left: 220px;
-
-    margin-left: 15px;
+    width: 100%;
 }
 
 .inputOcorrencia {
-    margin-left: 15px;
+    width: 100%;
 }
 
 .enviaOcorrencia {
-    margin-left: 15px;
+    width: 100%;
+}
+
+.enviaOcorrencia button {
+    min-width: 120px;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    color: #FF8300;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.enviaOcorrencia button:hover {
+    background-color: #fff6e5;
+    transform: translateY(-1px);
 }
 
 .titleOcorrencias {
-    height: 30px;
-    width: 400px;
-    left: 220px;
-
-    display: block;
-    margin-bottom: 15px;
+    height: 40px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 12px;
 
     border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
 .descriptionOcorrencias {
-    height: 30px;
-    width: 400px;
-    padding: 100px;
+    min-height: 180px;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
 
     border-radius: 8px;
-
-    display: flex;
-    margin-bottom: 15px;
-    margin-top: 50px;
+    border: 1px solid #ddd;
+    resize: vertical;
 }
 
 .inputOcorrencias {
-    height: 30px;
-    width: 400px;
+    width: 100%;
+    max-width: 100%;
+    color: #4a2f12;
+    font-weight: 600;
+    cursor: pointer;
+}
 
+.inputOcorrencias::file-selector-button {
+    min-height: 42px;
+    padding: 0 16px;
+    margin-right: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    color: #FF8300;
+    font-weight: 600;
+    cursor: pointer;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.inputOcorrencias::file-selector-button:hover {
+    background-color: #fff6e5;
+    transform: translateY(-1px);
 }
 
 .app {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -138,6 +203,7 @@ html, body {
 .layout {
   display: flex;
   flex: 1;
+  min-height: 0;
 }
 
 .content {
@@ -145,4 +211,27 @@ html, body {
   padding: 20px;
   background: #fff6e5;
   overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    position: relative;
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 240px;
+    height: 100%;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .newOcorrencia {
+    padding: 16px;
+  }
 }
