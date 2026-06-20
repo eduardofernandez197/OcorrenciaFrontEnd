@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm } from "react-hook-form";
-import type { SubmitHandler } from 'react-hook-form';
+// import type { SubmitHandler } from 'react-hook-form';
 import './App.css'
 import axios from 'axios';
 import { TopBar } from './componentes/Components/TopBar';
@@ -25,17 +25,18 @@ function App() {
 
     function onSubmit(data: FormValues) {
         const formData = new FormData()
-        formData.append("title", data.title)
-        formData.append("description", data.description)
-        if (data.fotos) {
-            Array.from(data.fotos).forEach(file => formData.append("fotos", file))
+        formData.append("titulo", data.titulo)
+        formData.append("descricao", data.descricao)
+        formData.append("emailDestino", data.emailDestino)
+        if (data.foto) {
+            Array.from(data.foto).forEach(file => formData.append("foto", file))
         }
 
         fetchDados(formData)
     }
 
     async function fetchDados(formData: FormData) {
-        const response = await axios.post("http://localhost:8080/ocorrencias", formData)
+        const response = await axios.post("http://localhost:8080/upload", formData)
         console.log("Resposta da API:", response.data)
     }
 

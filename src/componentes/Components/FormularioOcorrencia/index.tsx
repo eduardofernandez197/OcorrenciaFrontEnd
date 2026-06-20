@@ -13,13 +13,17 @@ export const FormularioOcorrencia = (props: FormularioOcorrenciaProps) => {
                 <form className='container' onSubmit={props.handleSubmit(props.onSubmit)}>
                     <div className='titleOcorrencia'>
                         <label htmlFor="titulo">Titulo</label>
-                        <input  className='titleOcorrencias' type="text" id='titulo' {...props.register("title")} placeholder='Titulo'/>
+                        <input  className='titleOcorrencias' type="text" id='titulo' {...props.register("titulo")} placeholder='Titulo'/>
                     </div>
                     <div className='descriptionOcorrencia' >
-                        <textarea className='descriptionOcorrencias' {...props.register("description")} placeholder='Descreva o ocorrido'></textarea>
+                        <textarea className='descriptionOcorrencias' {...props.register("descricao")} placeholder='Descreva o ocorrido'></textarea>
+                    </div>
+                    <div className='emailOcorrencia' >
+                        <label htmlFor="emailDestino">E-mail destino</label>
+                        <input className='emailOcorrencias' type="email" id='emailDestino' {...props.register("emailDestino")} placeholder='Digite o e-mail' />
                     </div>
                     <div className='inputOcorrencia' >
-                        <input className='inputOcorrencias' type="file" multiple {...props.register("fotos")}/>
+                        <input className='inputOcorrencias' type="file" multiple {...props.register("foto")}/>
                     </div>
                     <div className='enviaOcorrencia' >
                         <button type='submit'>Enviar</button>

@@ -1,5 +1,6 @@
 export type FormValues = {
-        title: string
-        description: string
-        fotos?: FileList    
+        titulo: string
+        descricao: string
+        emailDestino: string
+        foto?: FileList    
 }
