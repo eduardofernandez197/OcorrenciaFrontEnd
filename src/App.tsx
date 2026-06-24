@@ -1,5 +1,6 @@
 import './App.css'
-import { ResumoRelatorios, Saudacao } from './componentes/Components/Section';
+import { NovosRelatorios, ResumoRelatorios, Saudacao } from './componentes/Components/Section';
+import { NovoRelatorioButton, NovoRelatorioSection, NovoRelatorioTexto } from './componentes/Components/Section/style';
 import { TopBar } from './componentes/Components/TopBar';
 
 type Relatorio = {
@@ -22,12 +23,7 @@ function App() {
             
             <ResumoRelatorios/>
 
-            <section aria-label="Criar novo relatório">
-                <button type="button">
-                <span>Novo Relatório</span>
-                <small>Criar um novo relatório de inspeção</small>
-                </button>
-            </section>
+            <NovosRelatorios/>
 
             <section aria-labelledby="recentes-title">
                 <h2 id="recentes-title">Recentes</h2>

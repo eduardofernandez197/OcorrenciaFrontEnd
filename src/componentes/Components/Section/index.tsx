@@ -1,4 +1,4 @@
-import { ArticleItemHorizontal, NomeContainer, ResumoContainer, Saudacoes } from "./style";
+import { ArticleItemHorizontal, NomeContainer, NovoRelatorioButton, NovoRelatorioSection, NovoRelatorioTexto, ResumoContainer, Saudacoes } from "./style";
 
 
 export const Saudacao = () => {
@@ -16,20 +16,35 @@ export const Saudacao = () => {
 export const ResumoRelatorios = () => {
     return (
         <ResumoContainer aria-label="Resumo dos relatórios">
-            <ArticleItemHorizontal bgColor="#E6E6E6">
-                <strong style={{ color: "#9E9D9D"}}>1</strong>
-                <span style={{ color: "#9E9D9D"}}>Rascunhos</span>
+            <ArticleItemHorizontal bgColor="#f9fafb">
+                <strong style={{ color: "#6b7280"}}>1</strong>
+                <span style={{ color: "#6b7280"}}>Rascunhos</span>
             </ArticleItemHorizontal>
 
-            <ArticleItemHorizontal bgColor="#F2FAF2">
-                <strong style={{ color: "#44B244"}}>1</strong>
-                <span style={{ color: "#44B244"}}>Finalizados</span>
+            <ArticleItemHorizontal bgColor="#ecfdf5">
+                <strong style={{ color: "#059669"}}>1</strong>
+                <span style={{ color: "#059669"}}>Finalizados</span>
             </ArticleItemHorizontal>
 
-            <ArticleItemHorizontal bgColor="#F2FBFF">
-                <strong style={{ color: "#1E3FE8"}}>1</strong>
-                <span style={{ color: "#1E3FE8"}}>Enviados</span>
+            <ArticleItemHorizontal bgColor="#eff6ff">
+                <strong style={{ color: "#2563eb"}}>1</strong>
+                <span style={{ color: "#2563eb"}}>Enviados</span>
             </ArticleItemHorizontal>
          </ResumoContainer>
+    )
+}
+
+export const NovosRelatorios = () => {
+    return (
+      <NovoRelatorioSection aria-label="Criar novo relatório">
+          <NovoRelatorioButton type="button">
+            <span className="icon">+</span>
+            <NovoRelatorioTexto>
+              <span>Novo Relatório</span>
+              <small>Criar um novo relatório de inspeção</small>
+            </NovoRelatorioTexto>
+                <span className="arrow">›</span>
+          </NovoRelatorioButton>
+      </NovoRelatorioSection>
     )
 }
