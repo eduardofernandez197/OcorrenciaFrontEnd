@@ -1,11 +1,19 @@
-import { MenuButton, TopBarContainer } from './styles';
+import { LogoImage, TopBarContainer, TopBarTitle, } from "./styles";
+import logo from '../../../assets/imagens/logo.png';
+
 
 type TopBarProps = {
-    sideBarAbre: () => void;
+    title: string;
+    showLogo?: boolean;
 }
 
-export const TopBar = (props: TopBarProps) => {
-    return  <TopBarContainer>
-                <MenuButton onClick={props.sideBarAbre}>Menu</MenuButton>
-            </TopBarContainer>
+export const TopBar = ({ title, showLogo = false }: TopBarProps) => {
+    return (
+        <TopBarContainer>
+            {showLogo && (
+                <LogoImage src={logo} alt="Ocorrencias"/>
+            )}
+            <TopBarTitle>{title}</TopBarTitle>
+        </TopBarContainer>
+    )
 }

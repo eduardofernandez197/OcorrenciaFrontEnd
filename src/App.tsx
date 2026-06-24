@@ -1,67 +1,75 @@
-import { useState } from 'react'
-import { useForm } from "react-hook-form";
-// import type { SubmitHandler } from 'react-hook-form';
 import './App.css'
-import axios from 'axios';
+import { Saudacao } from './componentes/Components/Section';
 import { TopBar } from './componentes/Components/TopBar';
-import { SideBar } from './componentes/Components/SideBar';
-import { FormularioOcorrencia } from './componentes/Components/FormularioOcorrencia';
-import type { FormValues } from './Types/types';
 
+type Relatorio = {
+    id: number;
+    titulo: string;
+    cliente: string;
+    tempo: string;
+    status: string;
+}
 
 function App() {
 
-    const [sideBarOpen, setSideBarOpen] = useState<boolean>(false)
-    const [newOcorrencia, setNewOcorrencia] = useState<boolean>(false)
-    const {register, handleSubmit} = useForm<FormValues>()
-
-    function sideBarAbre() { 
-        setSideBarOpen ((prevState) => !prevState)
-    }
-
-    function createOcorrencia() {
-        setNewOcorrencia((prevState) => !prevState)
-    }
-
-    function onSubmit(data: FormValues) {
-        const formData = new FormData()
-        formData.append("titulo", data.titulo)
-        formData.append("descricao", data.descricao)
-        formData.append("emailDestino", data.emailDestino)
-        if (data.foto) {
-            Array.from(data.foto).forEach(file => formData.append("foto", file))
-        }
-
-        fetchDados(formData)
-    }
-
-    async function fetchDados(formData: FormData) {
-        const response = await axios.post("http://localhost:8080/upload", formData)
-        console.log("Resposta da API:", response.data)
-    }
-
+    const relatorios: Relatorio[] = []
 
     return(
-        <main className='app'>
-            <TopBar
-                sideBarAbre={sideBarAbre}
-            />
-            <div className="layout">
-                <SideBar
-                sideBarOpen={sideBarOpen}
-                createOcorrencia={createOcorrencia}
-                />
-                <div className="content">
-                    <FormularioOcorrencia
-                        newOcorrencia={newOcorrencia}
-                        handleSubmit={handleSubmit}
-                        onSubmit={onSubmit}
-                        register={register}
-                    />
-                </div>
-            </div>
+        <main>
+            <TopBar title="Ocorrencias" showLogo/>
 
-        </main>       
+            <Saudacao/>
+
+            <section aria-label="Resumo dos relatórios">
+                <article>
+                <strong>1</strong>
+                <span>Rascunhos</span>
+                </article>
+
+                <article>
+                <strong>1</strong>
+                <span>Finalizados</span>
+                </article>
+
+                <article>
+                <strong>1</strong>
+                <span>Enviados</span>
+                </article>
+            </section>
+
+            <section aria-label="Criar novo relatório">
+                <button type="button">
+                <span>Novo Relatório</span>
+                <small>Criar um novo relatório de inspeção</small>
+                </button>
+            </section>
+
+            <section aria-labelledby="recentes-title">
+                <h2 id="recentes-title">Recentes</h2>
+
+                {relatorios.length === 0 ? (
+                    <div>
+                    <p>Nenhum relatório criado ainda.</p>
+                    <button type="button">Novo Relatório</button>
+                    </div>
+                ) : (
+                    relatorios.map((relatorio) => (
+                    <article key={relatorio.id}>
+                        <h3>{relatorio.titulo}</h3>
+                        <p>{relatorio.cliente} · {relatorio.tempo}</p>
+                        <span>{relatorio.status}</span>
+                    </article>
+                    ))
+                )}
+            </section>
+
+            <nav aria-label="Navegação principal">
+                <button type="button">Início</button>
+                <button type="button">Relatórios</button>
+                <button type="button">Novo</button>
+                <button type="button">Perfil</button>
+            </nav>
+        </main>
     )
 }
 
