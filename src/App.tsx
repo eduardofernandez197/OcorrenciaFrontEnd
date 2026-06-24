@@ -1,5 +1,5 @@
 import './App.css'
-import { Saudacao } from './componentes/Components/Section';
+import { ResumoRelatorios, Saudacao } from './componentes/Components/Section';
 import { TopBar } from './componentes/Components/TopBar';
 
 type Relatorio = {
@@ -19,23 +19,8 @@ function App() {
             <TopBar title="Ocorrencias" showLogo/>
 
             <Saudacao/>
-
-            <section aria-label="Resumo dos relatórios">
-                <article>
-                <strong>1</strong>
-                <span>Rascunhos</span>
-                </article>
-
-                <article>
-                <strong>1</strong>
-                <span>Finalizados</span>
-                </article>
-
-                <article>
-                <strong>1</strong>
-                <span>Enviados</span>
-                </article>
-            </section>
+            
+            <ResumoRelatorios/>
 
             <section aria-label="Criar novo relatório">
                 <button type="button">
