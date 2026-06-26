@@ -41,7 +41,7 @@ export const NovosRelatorios = () => {
             <span className="icon">+</span>
             <NovoRelatorioTexto>
               <span>Novo Relatório</span>
-              <small>Criar um novo relatório de inspeção</small>
+              <small>Criar um novo relatório de inspeçao</small>
             </NovoRelatorioTexto>
                 <span className="arrow">›</span>
           </NovoRelatorioButton>
