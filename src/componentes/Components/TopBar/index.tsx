@@ -1,6 +1,5 @@
-import { LogoImage, TopBarContainer, TopBarTitle, } from "./styles";
+import { LogoImage, ProfileButton, TopBarBrand, TopBarContainer, TopBarTitle } from "./styles";
 import logo from '../../../assets/imagens/logo.png';
-
 
 type TopBarProps = {
     title: string;
@@ -10,10 +9,16 @@ type TopBarProps = {
 export const TopBar = ({ title, showLogo = false }: TopBarProps) => {
     return (
         <TopBarContainer>
-            {showLogo && (
-                <LogoImage src={logo} alt="Ocorrencias"/>
-            )}
-            <TopBarTitle>{title}</TopBarTitle>
+            <TopBarBrand>
+                {showLogo && (
+                    <LogoImage src={logo} alt="Ocorrencias"/>
+                )}
+                <TopBarTitle>{title}</TopBarTitle>
+            </TopBarBrand>
+
+            <ProfileButton type="button" aria-label="Perfil">
+                ♙
+            </ProfileButton>
         </TopBarContainer>
     )
 }
