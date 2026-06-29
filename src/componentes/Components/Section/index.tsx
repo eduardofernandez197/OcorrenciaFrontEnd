@@ -77,6 +77,8 @@ export const NovosRelatorios = () => {
 
 export const RelatoriosRecentes = ({ relatorios }: RelatoriosRecentesProps) => {
     return (
+
+        //section de relatórios recentes.
         <RecentesSection aria-labelledby="recentes-title">
             <Recentes id="recentes-title">Recentes</Recentes>
 
