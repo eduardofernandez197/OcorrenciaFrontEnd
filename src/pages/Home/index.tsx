@@ -1,6 +1,9 @@
 import { BottomNav } from "../../componentes/Components/BottomNav";
-import { NovosRelatorios, RelatoriosRecentes, ResumoRelatorios, Saudacao } from "../../componentes/Components/Section";
 import { TopBar } from "../../componentes/Components/TopBar";
+import { NovosRelatorios } from "./components/NovosRelatorios";
+import { RelatoriosRecentes } from "./components/RelatoriosRecentes";
+import { ResumoRelatorios } from "./components/ResumoRelatorios";
+import { Saudacao } from "./components/Saudacao";
 
 type Relatorio = {
     id: number;
@@ -37,7 +40,7 @@ export const Home = () => {
 
     return (
         <>
-            <TopBar title="Ocorrencias" showLogo/>
+            <TopBar title="Ocorrencias" showLogo buttomPerfil/>
 
             <Saudacao/>
             

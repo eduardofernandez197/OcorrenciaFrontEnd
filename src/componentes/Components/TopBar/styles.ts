@@ -12,7 +12,7 @@ export const TopBarContainer = styled.header`
     justify-content: space-between;
 `;
 
-export const TopBarBrand = styled.div`
+export const TopBarEsquerda = styled.div`
     display: flex;
     align-items: center;
 `;
@@ -31,7 +31,7 @@ export const TopBarTitle = styled.strong`
     line-height: 1;
 `;
 
-export const ProfileButton = styled.button`
+export const ButtonIconPerfil = styled.button`
     width: 34px;
     height: 34px;
 
@@ -45,5 +45,20 @@ export const ProfileButton = styled.button`
     justify-content: center;
 
     font-size: 20px;
+    cursor: pointer;
+`;
+
+export const ButtonIconVoltar = styled.button`
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    background-color: transparent;
+    color: #ff6b00;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
 `;
