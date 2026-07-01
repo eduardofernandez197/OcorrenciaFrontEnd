@@ -20,7 +20,8 @@ export const DadosGerais = () => {
     <>
       <TopBar title="Dados Gerais" ButtomVoltar />
 
-      <DadosGeraisContainer aria-labelledby="dados-gerais-title">
+      <DadosGeraisContainer aria-label="Dados Gerais">
+        {/* Indicador visual da etapa atual do formulário. */}
         <ProgressContainer aria-label="Progresso do formulário">
           <ProgressBar>
             <ProgressBarActive />
@@ -30,6 +31,7 @@ export const DadosGerais = () => {
           <ProgressStep>1/2</ProgressStep>
         </ProgressContainer>
 
+        {/* Formulário principal dos dados gerais do relatório. */}
         <FormContainer>
           <FormFieldset>
             <CampoContainer>
@@ -128,6 +130,7 @@ export const DadosGerais = () => {
             </CampoContainer>
           </FormFieldset>
 
+          {/* Ação principal do formulário, mantida no rodapé da tela. */}
           <FormFooter>
             <SalvarButton type="submit">Salvar e Continuar</SalvarButton>
           </FormFooter>

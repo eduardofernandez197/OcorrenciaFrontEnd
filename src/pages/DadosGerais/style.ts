@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// Container principal da tela abaixo da TopBar.
 export const DadosGeraisContainer = styled.section`
   flex: 1;
   width: 100%;
@@ -11,6 +12,7 @@ export const DadosGeraisContainer = styled.section`
   flex-direction: column;
 `;
 
+// Área do indicador de etapa 1/2.
 export const ProgressContainer = styled.div`
   display: flex;
   align-items: center;
@@ -19,6 +21,7 @@ export const ProgressContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+// Agrupa as duas faixas do progresso com espaço entre elas.
 export const ProgressBar = styled.div`
   flex: 1;
   display: flex;
@@ -46,6 +49,7 @@ export const ProgressStep = styled.span`
   font-weight: 500;
 `;
 
+// Formulário ocupa o espaço restante para manter o footer no final.
 export const FormContainer = styled.form`
   flex: 1;
   min-height: 0;
@@ -54,6 +58,7 @@ export const FormContainer = styled.form`
   flex-direction: column;
 `;
 
+// Área rolável dos campos do formulário.
 export const FormFieldset = styled.fieldset`
   flex: 1;
   min-height: 0;
@@ -77,9 +82,10 @@ export const CampoContainer = styled.div`
   gap: 7px;
 `;
 
+// Estilos base dos campos de texto.
 export const CampoLabel = styled.label`
   color: #64748b;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.4px;
 `;
@@ -90,13 +96,14 @@ export const CampoInput = styled.input`
   padding: 0 14px;
 
   border: 1px solid #e2e8f0;
-  border-radius: 11px;
+  border-radius: 12px;
   background-color: #ffffff;
 
   color: #111827;
   font-size: 14px;
 `;
 
+// Rodapé de ação do formulário.
 export const FormFooter = styled.footer`
   padding: 16px 0;
   background-color: #f5f5f5;
