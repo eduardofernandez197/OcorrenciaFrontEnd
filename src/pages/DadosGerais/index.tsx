@@ -1,5 +1,19 @@
 import { TopBar } from "../../componentes/Components/TopBar";
-import { DadosGeraisContainer, ProgressBar, ProgressContainer, ProgressFill, ProgressStep } from "./style";
+import {
+  CampoContainer,
+  CampoInput,
+  CampoLabel,
+  DadosGeraisContainer,
+  FormContainer,
+  FormFieldset,
+  FormFooter,
+  ProgressBar,
+  ProgressBarActive,
+  ProgressBarInactive,
+  ProgressContainer,
+  ProgressStep,
+  SalvarButton
+} from "./style";
 
 export const DadosGerais = () => {
   return (
@@ -9,114 +23,115 @@ export const DadosGerais = () => {
       <DadosGeraisContainer aria-labelledby="dados-gerais-title">
         <ProgressContainer aria-label="Progresso do formulário">
           <ProgressBar>
-            <ProgressFill />
+            <ProgressBarActive />
+            <ProgressBarInactive />
           </ProgressBar>
 
           <ProgressStep>1/2</ProgressStep>
         </ProgressContainer>
 
-        <form>
-          <fieldset>
-            <div>
-              <label htmlFor="tituloRelatorio">TÍTULO DO RELATÓRIO *</label>
-              <input
+        <FormContainer>
+          <FormFieldset>
+            <CampoContainer>
+              <CampoLabel htmlFor="tituloRelatorio">TÍTULO DO RELATÓRIO *</CampoLabel>
+              <CampoInput
                 id="tituloRelatorio"
                 name="tituloRelatorio"
                 type="text"
                 placeholder="Ex: RT-2024-047 - Inspeção Elétrica Bloco A"
                 required
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="cliente">CLIENTE / PRETENDENTE *</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="cliente">CLIENTE / PRETENDENTE *</CampoLabel>
+              <CampoInput
                 id="cliente"
                 name="cliente"
                 type="text"
                 placeholder="Razão social ou nome do cliente"
                 required
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="localizacao">LOCALIZAÇÃO *</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="localizacao">LOCALIZAÇÃO *</CampoLabel>
+              <CampoInput
                 id="localizacao"
                 name="localizacao"
                 type="text"
                 placeholder="Endereço ou descrição do local"
                 required
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="setor">SETOR</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="setor">SETOR</CampoLabel>
+              <CampoInput
                 id="setor"
                 name="setor"
                 type="text"
                 placeholder="Ex: Setor Elétrico"
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="area">ÁREA</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="area">ÁREA</CampoLabel>
+              <CampoInput
                 id="area"
                 name="area"
                 type="text"
                 placeholder="Ex: Área Comum"
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="departamento">DEPARTAMENTO</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="departamento">DEPARTAMENTO</CampoLabel>
+              <CampoInput
                 id="departamento"
                 name="departamento"
                 type="text"
                 placeholder="Ex: Manutenção"
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="responsavel">RESPONSÁVEL *</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="responsavel">RESPONSÁVEL *</CampoLabel>
+              <CampoInput
                 id="responsavel"
                 name="responsavel"
                 type="text"
                 placeholder="Nome do técnico responsável"
                 required
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="dataInspecao">DATA DA INSPEÇÃO *</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="dataInspecao">DATA DA INSPEÇÃO *</CampoLabel>
+              <CampoInput
                 id="dataInspecao"
                 name="dataInspecao"
                 type="text"
                 placeholder="dd/mm/aaaa"
                 required
               />
-            </div>
+            </CampoContainer>
 
-            <div>
-              <label htmlFor="revisao">REVISÃO</label>
-              <input
+            <CampoContainer>
+              <CampoLabel htmlFor="revisao">REVISÃO</CampoLabel>
+              <CampoInput
                 id="revisao"
                 name="revisao"
                 type="text"
                 defaultValue="Rev.00"
               />
-            </div>
-          </fieldset>
+            </CampoContainer>
+          </FormFieldset>
 
-          <footer>
-            <button type="submit">Salvar e Continuar</button>
-          </footer>
-        </form>
+          <FormFooter>
+            <SalvarButton type="submit">Salvar e Continuar</SalvarButton>
+          </FormFooter>
+        </FormContainer>
       </DadosGeraisContainer>
     </>
   );
