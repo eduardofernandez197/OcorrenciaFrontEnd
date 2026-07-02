@@ -40,7 +40,7 @@ export const Home = () => {
 
     return (
         <>
-            <TopBar title="Ocorrencias" showLogo buttomPerfil/>
+            <TopBar title="Home" showLogo buttomPerfil/>
 
             <Saudacao/>
             

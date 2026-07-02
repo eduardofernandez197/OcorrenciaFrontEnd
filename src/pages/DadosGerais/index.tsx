@@ -15,6 +15,16 @@ import {
   SalvarButton
 } from "./style";
 
+import {
+  FileText,
+  Building2,
+  MapPin,
+  Layers,
+  User,
+  Calendar,
+  Hash
+} from "lucide-react";
+
 export const DadosGerais = () => {
   return (
     <>
@@ -35,7 +45,12 @@ export const DadosGerais = () => {
         <FormContainer>
           <FormFieldset>
             <CampoContainer>
-              <CampoLabel htmlFor="tituloRelatorio">TÍTULO DO RELATÓRIO *</CampoLabel>
+              <CampoLabel htmlFor="tituloRelatorio">
+                <span className="labelIcone">
+                  <FileText size={12} />
+                  TÍTULO DO RELATÓRIO <span className="corAsterisco">*</span>
+                </span>
+              </CampoLabel>
               <CampoInput
                 id="tituloRelatorio"
                 name="tituloRelatorio"
@@ -46,7 +61,12 @@ export const DadosGerais = () => {
             </CampoContainer>
 
             <CampoContainer>
-              <CampoLabel htmlFor="cliente">CLIENTE / PRETENDENTE *</CampoLabel>
+              <CampoLabel htmlFor="cliente">
+                <span className="labelIcone">
+                  <Building2 size={12} />
+                  CLIENTE / PRETENDENTE <span className="corAsterisco">*</span>
+                </span>
+              </CampoLabel>
               <CampoInput
                 id="cliente"
                 name="cliente"
@@ -57,7 +77,12 @@ export const DadosGerais = () => {
             </CampoContainer>
 
             <CampoContainer>
-              <CampoLabel htmlFor="localizacao">LOCALIZAÇÃO *</CampoLabel>
+              <CampoLabel htmlFor="localizacao">
+                <span className="labelIcone">
+                  <MapPin size={12} />
+                  LOCALIZAÇÃO <span className="corAsterisco">*</span>
+                </span>
+              </CampoLabel>
               <CampoInput
                 id="localizacao"
                 name="localizacao"
@@ -68,7 +93,12 @@ export const DadosGerais = () => {
             </CampoContainer>
 
             <CampoContainer>
-              <CampoLabel htmlFor="setor">SETOR</CampoLabel>
+              <CampoLabel htmlFor="setor">
+                <span className="labelIcone">
+                  <Layers size={12} />
+                  SETOR
+                </span>
+              </CampoLabel>
               <CampoInput
                 id="setor"
                 name="setor"
@@ -98,7 +128,12 @@ export const DadosGerais = () => {
             </CampoContainer>
 
             <CampoContainer>
-              <CampoLabel htmlFor="responsavel">RESPONSÁVEL *</CampoLabel>
+              <CampoLabel htmlFor="responsavel">
+                <span className="labelIcone">
+                  <User size={12} />
+                  RESPONSÁVEL <span className="corAsterisco">*</span>
+                </span>
+              </CampoLabel>
               <CampoInput
                 id="responsavel"
                 name="responsavel"
@@ -109,7 +144,12 @@ export const DadosGerais = () => {
             </CampoContainer>
 
             <CampoContainer>
-              <CampoLabel htmlFor="dataInspecao">DATA DA INSPEÇÃO *</CampoLabel>
+              <CampoLabel htmlFor="dataInspecao">
+                <span className="labelIcone">
+                  <Calendar size={12} />
+                  DATA DA INSPEÇÃO <span className="corAsterisco">*</span>
+                </span>
+              </CampoLabel>
               <CampoInput
                 id="dataInspecao"
                 name="dataInspecao"
@@ -120,7 +160,12 @@ export const DadosGerais = () => {
             </CampoContainer>
 
             <CampoContainer>
-              <CampoLabel htmlFor="revisao">REVISÃO</CampoLabel>
+              <CampoLabel htmlFor="revisao">
+                <span className="labelIcone">
+                  <Hash size={12} />
+                  REVISÃO
+                </span>
+                </CampoLabel>
               <CampoInput
                 id="revisao"
                 name="revisao"

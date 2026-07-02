@@ -88,6 +88,22 @@ export const CampoLabel = styled.label`
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.4px;
+
+  .labelIcone {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  svg {
+    color: #ff6b00;
+    flex-shrink: 0;
+  }  
+
+  .corAsterisco {
+    color: #ff6b00;
+    font-size: 16px;
+  }
 `;
 
 export const CampoInput = styled.input`
