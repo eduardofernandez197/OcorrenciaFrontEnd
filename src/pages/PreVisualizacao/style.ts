@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const PreVisualizacaoContainer = styled.main`
-  min-height: calc(100vh - 52px);
   padding: 16px;
-  padding-bottom: 112px;
+  padding-bottom: 95px;
 
   background-color: #f3f4f6;
 
@@ -194,4 +193,160 @@ export const ObservacaoHeaderTexto = styled.div`
   }
 `;
 
+export const ObservacaoDescricao = styled.section`
+  padding: 12px 14px 0;
 
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  h3 {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.4px;
+  }
+
+  p {
+    color: #111827;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+`;
+
+export const RegistroFotografico = styled.section`
+  padding: 12px 14px 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const RegistroTitulo = styled.div`
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.4px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  span,
+  strong {
+    font: inherit;
+    color: inherit;
+  }
+`;
+
+export const FotoFigure = styled.figure`
+  position: relative;
+
+  width: 100%;
+  height: 150px;
+  margin: 0;
+
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #e5e7eb;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    object-fit: cover;
+  }
+`;
+
+export const NumeroFoto = styled.span`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+  background-color: #111827;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+`;
+
+export const RelatorioAssinaturaFooter = styled.footer`
+  width: 100%;
+  max-width: 720px;
+  min-height: 34px;
+  padding: 0 14px;
+
+  margin: 0 auto;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background-color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  strong {
+    color: #111827;
+    font-size: 11px;
+    font-weight: 700;
+  }
+`;
+
+export const AcoesFooter = styled.footer`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  padding: 12px 16px 15px;
+
+  background-color: #f3f4f6;
+  border-top: 1px solid #e5e7eb;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+`;
+
+export const BotaoAcao = styled.button`
+  height: 48px;
+
+  border: none;
+  border-radius: 14px;
+
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &.documento {
+    background-color: #ff6b00;
+    color: #ffffff;
+  }
+
+  &.email {
+    background-color: #ecfdf5;
+    color: #059669;
+  }
+`;

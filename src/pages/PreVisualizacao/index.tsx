@@ -1,6 +1,7 @@
 import { TopBar } from "../../componentes/Components/TopBar";
-import { HeaderContainer, HeaderIcone, HeaderTexto, InfoItem, ObservacaoContainer, ObservacaoHeader, ObservacaoHeaderTexto, ObservacaoNumero, PreVisualizacaoContainer, RelatorioCard, RelatorioCliente, RelatorioInfoGrid, RelatorioTipo, RelatorioTitulo, SectionInfContainer } from "./style";
+import { AcoesFooter, BotaoAcao, FotoFigure, HeaderContainer, HeaderIcone, HeaderTexto, InfoItem, NumeroFoto, ObservacaoContainer, ObservacaoDescricao, ObservacaoHeader, ObservacaoHeaderTexto, ObservacaoNumero, PreVisualizacaoContainer, RegistroFotografico, RegistroTitulo, RelatorioAssinaturaFooter, RelatorioCard, RelatorioCliente, RelatorioInfoGrid, RelatorioTipo, RelatorioTitulo, SectionInfContainer } from "./style";
 import { FileText } from "lucide-react";
+import imagemteste from "../../assets/imagens/imagemteste.png";
 
 export const PreVisualizacao = () => {
   return (
@@ -77,31 +78,39 @@ export const PreVisualizacao = () => {
               </ObservacaoHeaderTexto>
             </ObservacaoHeader>
 
-            <section>
+            <ObservacaoDescricao>
               <h3>OBSERVAÇÕES</h3>
               <p>Quadro com ferrugem avançada na tampa.</p>
-            </section>
+            </ObservacaoDescricao>
 
-            <section>
-              <h3>REGISTRO FOTOGRÁFICO — OBSERVAÇÃO 01</h3>
+            <RegistroFotografico>
+              <RegistroTitulo>
+                 <h3>REGISTRO FOTOGRÁFICO</h3>
+                 <strong>— OBSERVAÇÃO 01</strong>
+              </RegistroTitulo>
 
-              <figure>
-                <span>Foto 01</span>
-                <img src="" alt="Registro fotográfico da observação 01" />
-              </figure>
-            </section>
+              <FotoFigure>
+                <NumeroFoto>Foto 01</NumeroFoto>
+                <img src={imagemteste} alt="Registro fotográfico da observação 01" />
+              </FotoFigure>
+            </RegistroFotografico>
           </ObservacaoContainer>
         </section>
 
-        <footer aria-label="Informações do relatório">
+        <RelatorioAssinaturaFooter aria-label="Informações do relatório">
           <span>TechReport · 04/07/2026</span>
           <strong>Eng. Neto Silva</strong>
-        </footer>
+        </RelatorioAssinaturaFooter>
 
-        <footer aria-label="Ações do relatório">
-          <button type="button">Gerar Documento</button>
-          <button type="button">Enviar E-mail</button>
-        </footer>
+        <AcoesFooter aria-label="Ações do relatório">
+          <BotaoAcao className="documento" type="button">
+            Gerar Documento
+          </BotaoAcao>
+
+          <BotaoAcao className="email" type="button">
+            Enviar E-mail
+          </BotaoAcao>                    
+        </AcoesFooter>
       </PreVisualizacaoContainer>
     </>
   );
