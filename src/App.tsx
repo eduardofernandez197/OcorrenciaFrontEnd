@@ -3,6 +3,7 @@ import { Home } from './pages/Home';
 import { DadosGerais } from './pages/DadosGerais';
 import { Observacoes } from './pages/Observacoes';
 import { ObservacoesForm } from './pages/ObservacoesForm';
+import { PreVisualizacao } from './pages/PreVisualizacao';
 
 function App() {
     return(
@@ -15,8 +16,11 @@ function App() {
         //<main className='app'>
             //<Observacoes />
         //</main>
+        //<main className='app'>
+            //<ObservacoesForm/>
+        //</main>
         <main className='app'>
-            <ObservacoesForm/>
+            <PreVisualizacao/>
         </main>
     )
 }
