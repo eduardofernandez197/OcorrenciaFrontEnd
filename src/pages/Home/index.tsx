@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { BottomNav } from "../../componentes/Components/BottomNav";
 import { TopBar } from "../../componentes/Components/TopBar";
 import { NovosRelatorios } from "./components/NovosRelatorios";
@@ -14,6 +15,12 @@ type Relatorio = {
 }
 
 export const Home = () => {
+    const novoRelatorio = useNavigate()
+
+    function NavegarNovoRelaório() {
+        novoRelatorio('/DadosGerais')
+    }
+
     const relatorios: Relatorio[] = [
         {
             id: 1,

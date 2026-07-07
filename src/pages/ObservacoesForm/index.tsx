@@ -1,5 +1,7 @@
 import { Camera, Image, ImageIcon } from "lucide-react";
 import { TopBar } from "../../componentes/Components/TopBar";
+import { useNavigate } from "react-router";
+import { useState } from "react";
 import {
     BotaoFoto,
     BotaoSalvarObservacao,
@@ -18,7 +20,37 @@ import {
     ObservacaoTexto
 } from "./style";
 
+
+
 export const ObservacoesForm = () => {
+
+    const [titulo, setTitulo] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [foto, setFoto] = useState<File | null>(null);
+
+    const navigate = useNavigate();
+
+    const SalvarObservacao = (event: React.FormEvent<HTMLFormElement>) => {
+        event?.preventDefault
+
+        if (!titulo.trim()) {
+            alert("Informe o título da observação.");
+            return;
+        }
+
+        if (!descricao.trim()) {
+            alert("Informe a descrição da observação.");
+            return;
+        }
+
+        if (!foto) {
+            alert("Adicione uma foto.");
+              return;
+        }
+
+        navigate("/Observacoes");
+  };
+
     return (
         <>
             <TopBar title="Observação 01" ButtomVoltar />
@@ -35,12 +67,14 @@ export const ObservacoesForm = () => {
                 </ObservacaoCard>
 
                 {/* Formulário principal da observação. */}
-                <FormularioObservacao>
+                <FormularioObservacao onSubmit={SalvarObservacao}>
                     <CampoContainer>
                         <CampoLabel htmlFor="tituloObservacao">
                             TÍTULO DA OBSERVAÇÃO <span className="required">*</span>
                         </CampoLabel>
                         <CampoInput
+                            value={titulo}
+                            onChange={(event) => setTitulo(event.target.value)}
                             id="tituloObservacao"
                             name="tituloObservacao"
                             type="text"
@@ -54,6 +88,8 @@ export const ObservacoesForm = () => {
                             DESCRIÇÃO / OBSERVAÇÃO TÉCNICA
                         </CampoLabel>
                         <CampoTextarea
+                            value={descricao}
+                            onChange={(event) => setDescricao(event.target.value)}
                             id="descricaoObservacao"
                             name="descricaoObservacao"
                             placeholder="Descreva detalhadamente o que foi observado, não conformidades, recomendações..."
@@ -68,15 +104,44 @@ export const ObservacoesForm = () => {
                         </FotosTitulo>
 
                         <FotosAcoes>
-                            <BotaoFoto type="button" $active>
-                                <Camera size={22} strokeWidth={2} />
-                                <span>Tirar Foto</span>
-                            </BotaoFoto>
+                          // Input escondido que abre a camera do celular.
+                          <input
+                            id="fotoCamera"
+                            type="file"
+                            accept="image/*"
+                            capture="environment"
+                            hidden
+                            onChange={(event) => {
+                              // Pega a primeira foto selecionada; se nao tiver foto, salva null.
+                              const arquivo = event.target.files?.[0] ?? null;
+                              setFoto(arquivo);
+                            }}
+                          />
 
-                            <BotaoFoto type="button">
-                                <Image size={22} strokeWidth={2} />
-                                <span>Da Galeria</span>
-                            </BotaoFoto>
+                          // O htmlFor conecta esse botao visual ao input com id="fotoCamera".
+                          <BotaoFoto htmlFor="fotoCamera" $active>
+                            <Camera size={22} strokeWidth={2} />
+                            <span>Tirar Foto</span>
+                          </BotaoFoto>
+
+                          // Input escondido que abre a galeria de imagens.
+                          <input
+                            id="fotoGaleria"
+                            type="file"
+                            accept="image/*"
+                            hidden
+                            onChange={(event) => {
+                              // Pega a primeira imagem selecionada; se nao tiver imagem, salva null.
+                              const arquivo = event.target.files?.[0] ?? null;
+                              setFoto(arquivo);
+                            }}
+                          />
+
+                          // O htmlFor conecta esse botao visual ao input com id="fotoGaleria".
+                          <BotaoFoto htmlFor="fotoGaleria">
+                            <Image size={22} strokeWidth={2} />
+                            <span>Da Galeria</span>
+                          </BotaoFoto>
                         </FotosAcoes>
                     </FotosContainer>
 

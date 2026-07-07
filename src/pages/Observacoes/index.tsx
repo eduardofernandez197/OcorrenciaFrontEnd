@@ -1,5 +1,6 @@
 import { ClipboardList } from "lucide-react";
 import { TopBar } from "../../componentes/Components/TopBar"
+import { useNavigate } from "react-router";
 import {
     AdicionarObservacaoButton,
     ContainerIconBox,
@@ -12,7 +13,15 @@ import {
     ProgressStep
 } from "./style";
 
+
 export const Observacoes = () => {
+
+    const navigate = useNavigate();
+
+    const adicionaObservacao = () => {
+        navigate("/ObservacoesForm");
+  };
+
     return (
         <>
             <TopBar title="Observações" ButtomVoltar />
@@ -43,7 +52,7 @@ export const Observacoes = () => {
 
                 {/* Ação principal da tela. */}
                 <ObservacoesFooter>
-                    <AdicionarObservacaoButton type="button">
+                    <AdicionarObservacaoButton onClick={adicionaObservacao} type="button">
                         <span className="buttonIcon">+</span>
                         <span>Adicionar Observação</span>
                     </AdicionarObservacaoButton>

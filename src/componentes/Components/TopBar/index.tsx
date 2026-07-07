@@ -1,6 +1,7 @@
 import { ArrowLeft, User } from "lucide-react";
 import { ButtonIconPerfil, ButtonIconVoltar, LogoImage, TopBarContainer, TopBarEsquerda, TopBarTitle } from "./styles";
 import logo from '../../../assets/imagens/logo.png';
+import { useNavigate } from "react-router";
 
 type TopBarProps = {
     title: string;
@@ -10,11 +11,17 @@ type TopBarProps = {
 }
 
 export const TopBar = ({ title, showLogo = false, ButtomVoltar = false, buttomPerfil = false }: TopBarProps) => {
+  const navigate = useNavigate();
+
+  const voltarPaginaAnterior = () => {
+    navigate(-1);
+  };
+
     return (
         <TopBarContainer>
             <TopBarEsquerda>
                 {ButtomVoltar && (
-                    <ButtonIconVoltar type="button" aria-label="Voltar">
+                    <ButtonIconVoltar onClick={voltarPaginaAnterior} type="button" aria-label="Voltar">
                         <ArrowLeft size={22} strokeWidth={2} />
                     </ButtonIconVoltar>
                 )}

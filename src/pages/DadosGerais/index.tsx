@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { TopBar } from "../../componentes/Components/TopBar";
 import {
   CampoContainer,
@@ -26,6 +27,12 @@ import {
 } from "lucide-react";
 
 export const DadosGerais = () => {
+    const navigate = useNavigate();
+
+    const salvaEContinua = () => {
+        navigate("/Observacoes");
+  };
+
   return (
     <>
       <TopBar title="Dados Gerais" ButtomVoltar />
@@ -177,7 +184,7 @@ export const DadosGerais = () => {
 
           {/* Ação principal do formulário, mantida no rodapé da tela. */}
           <FormFooter>
-            <SalvarButton type="submit">Salvar e Continuar</SalvarButton>
+            <SalvarButton onClick={salvaEContinua} type="submit">Salvar e Continuar</SalvarButton>
           </FormFooter>
         </FormContainer>
       </DadosGeraisContainer>

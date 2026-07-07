@@ -165,7 +165,7 @@ export const FotosAcoes = styled.div`
 `;
 
 // Botao usado para escolher a origem da foto.
-export const BotaoFoto = styled.button<{ $active?: boolean }>`
+export const BotaoFoto = styled.label<{ $active?: boolean }>`
   min-height: 78px;
 
   border: 1.5px dashed ${({ $active }) => ($active ? '#ff6b00' : '#e2e8f0')};
