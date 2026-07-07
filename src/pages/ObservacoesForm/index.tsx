@@ -104,7 +104,7 @@ export const ObservacoesForm = () => {
                         </FotosTitulo>
 
                         <FotosAcoes>
-                          // Input escondido que abre a camera do celular.
+                          {/* Input escondido que abre a camera do celular. */}
                           <input
                             id="fotoCamera"
                             type="file"
@@ -118,13 +118,13 @@ export const ObservacoesForm = () => {
                             }}
                           />
 
-                          // O htmlFor conecta esse botao visual ao input com id="fotoCamera".
+                          {/* O htmlFor conecta esse botao visual ao input com id="fotoCamera". */}
                           <BotaoFoto htmlFor="fotoCamera" $active>
                             <Camera size={22} strokeWidth={2} />
                             <span>Tirar Foto</span>
                           </BotaoFoto>
 
-                          // Input escondido que abre a galeria de imagens.
+                          {/* Input escondido que abre a galeria de imagens. */}
                           <input
                             id="fotoGaleria"
                             type="file"
@@ -137,7 +137,7 @@ export const ObservacoesForm = () => {
                             }}
                           />
 
-                          // O htmlFor conecta esse botao visual ao input com id="fotoGaleria".
+                          {/* O htmlFor conecta esse botao visual ao input com id="fotoGaleria". */}
                           <BotaoFoto htmlFor="fotoGaleria">
                             <Image size={22} strokeWidth={2} />
                             <span>Da Galeria</span>
