@@ -15,11 +15,6 @@ type Relatorio = {
 }
 
 export const Home = () => {
-    const novoRelatorio = useNavigate()
-
-    function NavegarNovoRelaório() {
-        novoRelatorio('/DadosGerais')
-    }
 
     const relatorios: Relatorio[] = [
         {

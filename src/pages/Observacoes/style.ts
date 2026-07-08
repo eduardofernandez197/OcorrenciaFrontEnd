@@ -5,7 +5,7 @@ export const ObservacoesContainer = styled.section`
   flex: 1;
   width: 100%;
   min-height: 0;
-  padding: 16px 17px 0;
+  padding: 16px 17px 90px;
   background-color: #f5f5f5;
 
   display: flex;
@@ -84,10 +84,149 @@ export const ContainerIconBox = styled.div`
   justify-content: center;
 `;
 
+export const ListaObservacoes = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const ObservacaoCard = styled.article`
+  padding: 14px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background-color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const ObservacaoCardHeader = styled.header`
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+`;
+
+export const ObservacaoNumero = styled.strong`
+  width: 34px;
+  height: 34px;
+
+  border-radius: 11px;
+  background-color: #ff6b00;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  font-size: 13px;
+  font-weight: 800;
+`;
+
+export const ObservacaoConteudo = styled.div`
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  h3 {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.4px;
+  }
+
+  strong {
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  p {
+    color: #475569;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+`;
+
+export const StatusCompleto = styled.span`
+  width: fit-content;
+  padding: 3px 8px;
+
+  border-radius: 999px;
+  background-color: #dcfce7;
+  color: #059669;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+`;
+
+export const ObservacaoMeta = styled.span`
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+export const ObservacaoAcoes = styled.div`
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+
+  display: grid;
+  grid-template-columns: 1fr 42px;
+  gap: 10px;
+`;
+
+export const EditarButton = styled.button`
+  height: 34px;
+
+  border: none;
+  border-radius: 10px;
+  background-color: #fff7ed;
+  color: #ff6b00;
+
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+`;
+
+export const ExcluirButton = styled.button`
+  width: 42px;
+  height: 34px;
+
+  border: none;
+  border-radius: 10px;
+  background-color: #fef2f2;
+  color: #ef4444;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 // Rodape da tela com a acao principal.
 export const ObservacoesFooter = styled.footer`
-  padding: 16px 0 14px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 12px 17px 14px;
   background-color: #f5f5f5;
+  border-top: 1px solid #e5e7eb;
 `;
 
 // Botao principal para adicionar uma nova observacao.

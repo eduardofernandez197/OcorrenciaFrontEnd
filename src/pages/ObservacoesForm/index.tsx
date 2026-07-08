@@ -20,18 +20,28 @@ import {
     ObservacaoTexto
 } from "./style";
 
+type ObservacoesFormData = {
+    titulo: string;
+    descricao: string;
+    foto: File;
+}
 
+type ObservacoesFormProps = {
+    // Funcao recebida do App para enviar os dados preenchidos para o estado global temporario.
+    aoSalvar: (observacao: ObservacoesFormData) => void;
+}
 
-export const ObservacoesForm = () => {
+export const ObservacoesForm = ({ aoSalvar }: ObservacoesFormProps) => {
 
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
+    // File quando existe foto selecionada; null quando nenhuma foto foi escolhida.
     const [foto, setFoto] = useState<File | null>(null);
 
     const navigate = useNavigate();
 
     const SalvarObservacao = (event: React.FormEvent<HTMLFormElement>) => {
-        event?.preventDefault
+        event.preventDefault();
 
         if (!titulo.trim()) {
             alert("Informe o título da observação.");
@@ -47,6 +57,13 @@ export const ObservacoesForm = () => {
             alert("Adicione uma foto.");
               return;
         }
+
+        // Entrega titulo, descricao e foto para a funcao recebida do App.
+        aoSalvar({
+            titulo,
+            descricao,
+            foto,
+        })
 
         navigate("/Observacoes");
   };

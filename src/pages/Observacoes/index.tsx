@@ -1,26 +1,50 @@
-import { ClipboardList } from "lucide-react";
+import { ClipboardList, Pencil, Trash2 } from "lucide-react";
 import { TopBar } from "../../componentes/Components/TopBar"
 import { useNavigate } from "react-router";
 import {
     AdicionarObservacaoButton,
     ContainerIconBox,
+    EditarButton,
+    ExcluirButton,
+    ListaObservacoes,
+    ObservacaoAcoes,
+    ObservacaoCard,
+    ObservacaoCardHeader,
+    ObservacaoConteudo,
+    ObservacaoMeta,
+    ObservacaoNumero,
     ObservacoesContainer,
     ObservacoesFooter,
     ObservacoesVazioContainer,
     ProgressBar,
     ProgressBarActive,
     ProgressContainer,
-    ProgressStep
+    ProgressStep,
+    StatusCompleto
 } from "./style";
 
+type Observacao = {
+    id: number;
+    titulo: string;
+    descricao: string;
+    foto: File;
+}
 
-export const Observacoes = () => {
+type ObservacoesProps = {
+    observacoes: Observacao[];
+}
+
+export const Observacoes = ({ observacoes }: ObservacoesProps) => {
 
     const navigate = useNavigate();
 
     const adicionaObservacao = () => {
         navigate("/ObservacoesForm");
   };
+
+    const formatarNumeroObservacao = (index: number) => {
+        return String(index + 1).padStart(2, "0");
+    };
 
     return (
         <>
@@ -38,7 +62,8 @@ export const Observacoes = () => {
                 </ProgressContainer>
 
                 {/* Estado vazio mostrado antes de adicionar observações. */}
-                <ObservacoesVazioContainer>
+                {observacoes.length === 0 ? (
+                  <ObservacoesVazioContainer>
                     <ContainerIconBox aria-hidden="true">
                         <ClipboardList size={28} strokeWidth={2} />
                     </ContainerIconBox>
@@ -48,7 +73,38 @@ export const Observacoes = () => {
                     <p>
                         Toque em "Adicionar Observação" para começar
                     </p>
-                </ObservacoesVazioContainer>
+                  </ObservacoesVazioContainer>
+                ) : (
+                  <ListaObservacoes>
+                    {observacoes.map((observacao, index) => (
+                      <ObservacaoCard key={observacao.id}>
+                        <ObservacaoCardHeader>
+                            <ObservacaoNumero>{formatarNumeroObservacao(index)}</ObservacaoNumero>
+
+                            <ObservacaoConteudo>
+                                <h3>OBSERVAÃ‡ÃƒO {formatarNumeroObservacao(index)}</h3>
+                                <StatusCompleto>Completo</StatusCompleto>
+                                <strong>{observacao.titulo}</strong>
+                                <p>{observacao.descricao}</p>
+                                <ObservacaoMeta>1 foto</ObservacaoMeta>
+                            </ObservacaoConteudo>
+                        </ObservacaoCardHeader>
+
+                        <ObservacaoAcoes>
+                            <EditarButton type="button">
+                                <Pencil size={14} strokeWidth={2} />
+                                <span>Editar</span>
+                            </EditarButton>
+
+                            <ExcluirButton type="button" aria-label="Excluir observaÃ§Ã£o">
+                                <Trash2 size={15} strokeWidth={2} />
+                            </ExcluirButton>
+                        </ObservacaoAcoes>
+                      </ObservacaoCard>
+                    ))}
+                  </ListaObservacoes>
+                )}  
+
 
                 {/* Ação principal da tela. */}
                 <ObservacoesFooter>
