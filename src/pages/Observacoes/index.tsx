@@ -82,7 +82,7 @@ export const Observacoes = ({ observacoes }: ObservacoesProps) => {
                             <ObservacaoNumero>{formatarNumeroObservacao(index)}</ObservacaoNumero>
 
                             <ObservacaoConteudo>
-                                <h3>OBSERVAÃ‡ÃƒO {formatarNumeroObservacao(index)}</h3>
+                                <h3>OBSERVAÇÃO {formatarNumeroObservacao(index)}</h3>
                                 <StatusCompleto>Completo</StatusCompleto>
                                 <strong>{observacao.titulo}</strong>
                                 <p>{observacao.descricao}</p>
