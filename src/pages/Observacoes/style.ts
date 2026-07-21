@@ -217,6 +217,31 @@ export const ExcluirButton = styled.button`
   justify-content: center;
 `;
 
+export const PreVisualizacaoButton = styled.button`
+  width: 100%;
+  height: 44px;
+
+  border: none;
+  border-radius: 14px;
+  background-color: #f1f5f9;
+  color: #111827;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+
+  .buttonIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
 // Rodape da tela com a acao principal.
 export const ObservacoesFooter = styled.footer`
   position: fixed;

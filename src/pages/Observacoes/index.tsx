@@ -16,12 +16,17 @@ import {
     ObservacoesContainer,
     ObservacoesFooter,
     ObservacoesVazioContainer,
+    PreVisualizacaoButton,
     ProgressBar,
     ProgressBarActive,
     ProgressContainer,
     ProgressStep,
     StatusCompleto
 } from "./style";
+
+import {
+    Eye
+} from "lucide-react";
 
 type Observacao = {
     id: number;
@@ -40,7 +45,11 @@ export const Observacoes = ({ observacoes }: ObservacoesProps) => {
 
     const adicionaObservacao = () => {
         navigate("/ObservacoesForm");
-  };
+    };
+
+    const irParaPreVisualizacao = () => {
+        navigate("/PreVisualizacao");
+    };
 
     const formatarNumeroObservacao = (index: number) => {
         return String(index + 1).padStart(2, "0");
@@ -108,6 +117,13 @@ export const Observacoes = ({ observacoes }: ObservacoesProps) => {
 
                 {/* Ação principal da tela. */}
                 <ObservacoesFooter>
+                    {observacoes.length > 0 && (
+                        <PreVisualizacaoButton onClick={irParaPreVisualizacao}>
+                            <span className="buttonIcon"><Eye/></span>
+                            <span>Pré-visualizar Relatório</span>
+                        </PreVisualizacaoButton>
+                    )}
+
                     <AdicionarObservacaoButton onClick={adicionaObservacao} type="button">
                         <span className="buttonIcon">+</span>
                         <span>Adicionar Observação</span>
