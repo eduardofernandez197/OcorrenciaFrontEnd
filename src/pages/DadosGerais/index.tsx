@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import { TopBar } from "../../componentes/Components/TopBar";
 import {
   CampoContainer,
@@ -26,11 +27,48 @@ import {
   Hash
 } from "lucide-react";
 
+type DadosGeraisFormValues = {
+  titulo: string;
+  cliente: string;
+  localizacao: string;
+  setor: string;
+  area: string;
+  departamento: string;
+  responsavel: string;
+  data_inspecao: string;
+  revisao: string;
+};
+
 export const DadosGerais = () => {
     const navigate = useNavigate();
 
-    const salvaEContinua = () => {
-        navigate("/Observacoes");
+    const [formValues, setFormValues] = useState<DadosGeraisFormValues>({
+      titulo: "",
+      cliente: "",
+      localizacao: "",
+      setor: "",
+      area: "",
+      departamento: "",
+      responsavel: "",
+      data_inspecao: "",
+      revisao: "Rev.00",
+    });
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+
+      setFormValues((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    };
+
+    const salvaEContinua = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+
+      console.log(formValues);
+
+      navigate("/Observacoes");
   };
 
   return (
@@ -49,7 +87,7 @@ export const DadosGerais = () => {
         </ProgressContainer>
 
         {/* Formulário principal dos dados gerais do relatório. */}
-        <FormContainer>
+        <FormContainer onSubmit={salvaEContinua}>
           <FormFieldset>
             <CampoContainer>
               <CampoLabel htmlFor="tituloRelatorio">
@@ -60,7 +98,9 @@ export const DadosGerais = () => {
               </CampoLabel>
               <CampoInput
                 id="tituloRelatorio"
-                name="tituloRelatorio"
+                name="titulo"
+                value={formValues.titulo}
+                onChange={handleChange}
                 type="text"
                 placeholder="Ex: RT-2024-047 - Inspeção Elétrica Bloco A"
                 required
@@ -77,6 +117,8 @@ export const DadosGerais = () => {
               <CampoInput
                 id="cliente"
                 name="cliente"
+                value={formValues.cliente}
+                onChange={handleChange}
                 type="text"
                 placeholder="Razão social ou nome do cliente"
                 required
@@ -93,6 +135,8 @@ export const DadosGerais = () => {
               <CampoInput
                 id="localizacao"
                 name="localizacao"
+                value={formValues.localizacao}
+                onChange={handleChange}
                 type="text"
                 placeholder="Endereço ou descrição do local"
                 required
@@ -109,6 +153,8 @@ export const DadosGerais = () => {
               <CampoInput
                 id="setor"
                 name="setor"
+                value={formValues.setor}
+                onChange={handleChange}
                 type="text"
                 placeholder="Ex: Setor Elétrico"
               />
@@ -119,6 +165,8 @@ export const DadosGerais = () => {
               <CampoInput
                 id="area"
                 name="area"
+                value={formValues.area}
+                onChange={handleChange}
                 type="text"
                 placeholder="Ex: Área Comum"
               />
@@ -129,6 +177,8 @@ export const DadosGerais = () => {
               <CampoInput
                 id="departamento"
                 name="departamento"
+                value={formValues.departamento}
+                onChange={handleChange}
                 type="text"
                 placeholder="Ex: Manutenção"
               />
@@ -144,6 +194,8 @@ export const DadosGerais = () => {
               <CampoInput
                 id="responsavel"
                 name="responsavel"
+                value={formValues.responsavel}
+                onChange={handleChange}
                 type="text"
                 placeholder="Nome do técnico responsável"
                 required
@@ -158,10 +210,11 @@ export const DadosGerais = () => {
                 </span>
               </CampoLabel>
               <CampoInput
-                id="dataInspecao"
-                name="dataInspecao"
-                type="text"
-                placeholder="dd/mm/aaaa"
+                id="data_inspecao"
+                name="data_inspecao"
+                value={formValues.data_inspecao}
+                onChange={handleChange}
+                type="date"
                 required
               />
             </CampoContainer>
@@ -176,15 +229,16 @@ export const DadosGerais = () => {
               <CampoInput
                 id="revisao"
                 name="revisao"
+                value={formValues.revisao}
+                onChange={handleChange}
                 type="text"
-                defaultValue="Rev.00"
               />
             </CampoContainer>
           </FormFieldset>
 
           {/* Ação principal do formulário, mantida no rodapé da tela. */}
-          <FormFooter>
-            <SalvarButton onClick={salvaEContinua} type="submit">Salvar e Continuar</SalvarButton>
+          <FormFooter >
+            <SalvarButton type="submit">Salvar e Continuar</SalvarButton>
           </FormFooter>
         </FormContainer>
       </DadosGeraisContainer>

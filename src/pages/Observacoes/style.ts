@@ -249,6 +249,10 @@ export const ObservacoesFooter = styled.footer`
   right: 0;
   bottom: 0;
 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   padding: 12px 17px 14px;
   background-color: #f5f5f5;
   border-top: 1px solid #e5e7eb;
