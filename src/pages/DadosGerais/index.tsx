@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { api } from "../../Services/api";
 import { TopBar } from "../../componentes/Components/TopBar";
 import {
   CampoContainer,
@@ -63,12 +64,28 @@ export const DadosGerais = () => {
       }));
     };
 
-    const salvaEContinua = (event: React.FormEvent<HTMLFormElement>) => {
+    const salvaEContinua = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
-      console.log(formValues);
+      const dadosGerais = new FormData();
 
-      navigate("/Observacoes");
+      dadosGerais.append("titulo", formValues.titulo);
+      dadosGerais.append("cliente", formValues.cliente);
+      dadosGerais.append("localizacao", formValues.localizacao);
+      dadosGerais.append("setor", formValues.setor);
+      dadosGerais.append("area", formValues.area);
+      dadosGerais.append("departamento", formValues.departamento);
+      dadosGerais.append("responsavel", formValues.responsavel);
+      dadosGerais.append("data_inspecao", formValues.data_inspecao);
+      dadosGerais.append("revisao", formValues.revisao);
+
+      try {
+        await api.post("/upload", dadosGerais);
+
+        navigate("/Observacoes");
+      } catch (error) {
+        console.error("Erro ao salvar dados gerais:", error);
+      }
   };
 
   return (
@@ -215,6 +232,8 @@ export const DadosGerais = () => {
                 value={formValues.data_inspecao}
                 onChange={handleChange}
                 type="date"
+                min="1900-01-01"
+                max="2099-12-31"
                 required
               />
             </CampoContainer>
