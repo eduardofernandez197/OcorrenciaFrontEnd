@@ -33,6 +33,7 @@ type ObservacoesFormProps = {
 
 export const ObservacoesForm = ({ aoSalvar }: ObservacoesFormProps) => {
 
+    // Estados controlam o que o usuario digita antes de salvar.
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
     // File quando existe foto selecionada; null quando nenhuma foto foi escolhida.
@@ -41,8 +42,10 @@ export const ObservacoesForm = ({ aoSalvar }: ObservacoesFormProps) => {
     const navigate = useNavigate();
 
     const SalvarObservacao = (event: React.FormEvent<HTMLFormElement>) => {
+        // Mantem o controle do envio dentro do React.
         event.preventDefault();
 
+        // Validacoes simples antes de enviar para o App/backend.
         if (!titulo.trim()) {
             alert("Informe o título da observação.");
             return;

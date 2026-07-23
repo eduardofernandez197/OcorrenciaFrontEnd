@@ -43,6 +43,7 @@ type DadosGeraisFormValues = {
 export const DadosGerais = () => {
     const navigate = useNavigate();
 
+    // Estado unico do formulario: cada chave precisa bater com o name do input.
     const [formValues, setFormValues] = useState<DadosGeraisFormValues>({
       titulo: "",
       cliente: "",
@@ -58,6 +59,7 @@ export const DadosGerais = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
 
+      // [name] usa o name do input para atualizar somente o campo alterado.
       setFormValues((prevState) => ({
         ...prevState,
         [name]: value,
@@ -65,8 +67,10 @@ export const DadosGerais = () => {
     };
 
     const salvaEContinua = async (event: React.FormEvent<HTMLFormElement>) => {
+      // Evita o recarregamento padrao do navegador ao enviar o formulario.
       event.preventDefault();
 
+      // O backend recebe multipart/form-data, por isso montamos um FormData.
       const dadosGerais = new FormData();
 
       dadosGerais.append("titulo", formValues.titulo);
@@ -80,6 +84,7 @@ export const DadosGerais = () => {
       dadosGerais.append("revisao", formValues.revisao);
 
       try {
+        // A baseURL esta configurada em src/Services/api.ts.
         await api.post("/upload", dadosGerais);
 
         navigate("/Observacoes");
@@ -257,6 +262,7 @@ export const DadosGerais = () => {
 
           {/* Ação principal do formulário, mantida no rodapé da tela. */}
           <FormFooter >
+            {/* type="submit" dispara o onSubmit do FormContainer. */}
             <SalvarButton type="submit">Salvar e Continuar</SalvarButton>
           </FormFooter>
         </FormContainer>

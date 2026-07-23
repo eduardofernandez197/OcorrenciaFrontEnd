@@ -25,16 +25,19 @@ type NovaObservacao = {
 function App() {
 
     // Lista temporaria de observacoes enquanto ainda nao temos backend.
+    // A tela Observacoes recebe essa lista por props para renderizar os cards.
     const [observacoes, setObservacoes] = useState<Observacao[]>([]);
     
     // Funcao que o formulario chama para entregar uma nova observacao ao App.
     const adicionarObservacao = (novaObservacao:NovaObservacao) => {
+      // O formulario envia titulo, descricao e foto; aqui adicionamos o id.
       const observacaoComId = {
         id: Date.now(),
         ...novaObservacao,
       };
 
       // observacoesAtuais e preenchido pelo React com o valor atual do estado.
+      // O spread mantem as observacoes antigas e adiciona a nova no final.
       setObservacoes((observacoesAtuais) => [
         ...observacoesAtuais,
         observacaoComId,
