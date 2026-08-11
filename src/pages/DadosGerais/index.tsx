@@ -85,7 +85,7 @@ export const DadosGerais = () => {
 
       try {
         // A baseURL esta configurada em src/Services/api.ts.
-        await api.post("/upload", dadosGerais);
+        await api.post("/ocorrencias", dadosGerais);
 
         navigate("/Observacoes");
       } catch (error) {
