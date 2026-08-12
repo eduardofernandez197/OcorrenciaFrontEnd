@@ -85,7 +85,9 @@ export const DadosGerais = () => {
 
       try {
         // A baseURL esta configurada em src/Services/api.ts.
-        await api.post("/ocorrencias", dadosGerais);
+        const response = await api.post("/ocorrencias", dadosGerais);
+
+        localStorage.setItem("ocorrencaId", String(response.data.id))
 
         navigate("/Observacoes");
       } catch (error) {
