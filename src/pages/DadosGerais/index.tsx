@@ -87,9 +87,12 @@ export const DadosGerais = () => {
         // A baseURL esta configurada em src/Services/api.ts.
         const response = await api.post("/ocorrencias", dadosGerais);
 
-        localStorage.setItem("ocorrencaId", String(response.data.id))
+        const ocorrenciaId = response .data.id;
 
-        navigate("/Observacoes");
+        //localStorage.setItem("ocorrenciaId", String(response.data.id))
+
+        navigate(`/ocorrencias/${ocorrenciaId}/observacoes`);
+        
       } catch (error) {
         console.error("Erro ao salvar dados gerais:", error);
       }
