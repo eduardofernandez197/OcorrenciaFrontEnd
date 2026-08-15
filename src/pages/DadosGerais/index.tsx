@@ -87,7 +87,7 @@ export const DadosGerais = () => {
         // A baseURL esta configurada em src/Services/api.ts.
         const response = await api.post("/ocorrencias", dadosGerais);
 
-        const ocorrenciaId = response .data.id;
+        const ocorrenciaId = response.data.id;
 
         //localStorage.setItem("ocorrenciaId", String(response.data.id))
 

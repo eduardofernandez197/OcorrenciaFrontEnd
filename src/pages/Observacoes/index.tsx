@@ -1,6 +1,6 @@
 import { ClipboardList, Pencil, Trash2 } from "lucide-react";
 import { TopBar } from "../../componentes/Components/TopBar"
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
     AdicionarObservacaoButton,
     ContainerIconBox,
@@ -27,6 +27,7 @@ import {
 import {
     Eye
 } from "lucide-react";
+import { useState } from "react";
 
 type Observacao = {
     id: number;
@@ -42,9 +43,12 @@ type ObservacoesProps = {
 export const Observacoes = ({ observacoes }: ObservacoesProps) => {
 
     const navigate = useNavigate();
+    const { ocorrenciaId } = useParams();
+
+    //const [observacoes, setObservacoes] = useState<Observacao[]>([]);
 
     const adicionaObservacao = () => {
-        navigate("/ObservacoesForm");
+        navigate(`/ocorrencias/${ocorrenciaId}/observacoes/nova`);
     };
 
     const irParaPreVisualizacao = () => {
