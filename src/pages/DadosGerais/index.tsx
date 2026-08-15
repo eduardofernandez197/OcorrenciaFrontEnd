@@ -71,17 +71,17 @@ export const DadosGerais = () => {
       event.preventDefault();
 
       // O backend recebe multipart/form-data, por isso montamos um FormData.
-      const dadosGerais = new FormData();
-
-      dadosGerais.append("titulo", formValues.titulo);
-      dadosGerais.append("cliente", formValues.cliente);
-      dadosGerais.append("localizacao", formValues.localizacao);
-      dadosGerais.append("setor", formValues.setor);
-      dadosGerais.append("area", formValues.area);
-      dadosGerais.append("departamento", formValues.departamento);
-      dadosGerais.append("responsavel", formValues.responsavel);
-      dadosGerais.append("data_inspecao", formValues.data_inspecao);
-      dadosGerais.append("revisao", formValues.revisao);
+      const dadosGerais = {
+        titulo: formValues.titulo,
+        cliente: formValues.cliente,
+        localizacao: formValues.localizacao,
+        setor: formValues.setor,
+        area: formValues.area,
+        departamento: formValues.departamento,
+        responsavel: formValues.responsavel,
+        data_inspecao: formValues.data_inspecao,
+        revisao: formValues.revisao,
+      }
 
       try {
         // A baseURL esta configurada em src/Services/api.ts.
