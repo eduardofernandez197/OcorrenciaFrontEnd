@@ -27,7 +27,12 @@ import {
 import {
     Eye
 } from "lucide-react";
-import { useState } from "react";
+
+import { 
+    useEffect,
+    useState 
+} from "react";
+import { api } from "../../Services/api";
 
 type Observacao = {
     id: number;
@@ -36,16 +41,22 @@ type Observacao = {
     foto: File;
 }
 
-type ObservacoesProps = {
-    observacoes: Observacao[];
-}
-
-export const Observacoes = ({ observacoes }: ObservacoesProps) => {
+export const Observacoes = () => {
 
     const navigate = useNavigate();
+    const [observacoes, setObservacoes] = useState<Observacao[]>([]);
+
     const { ocorrenciaId } = useParams();
 
-    //const [observacoes, setObservacoes] = useState<Observacao[]>([]);
+    useEffect(() => {
+        const buscarObservacoes = async() => {
+            const response = await api.get(`/ocorrencias/${ocorrenciaId}/observacoes`)
+
+            setObservacoes(response.data);
+        }
+        buscarObservacoes();
+    }, [ocorrenciaId]);
+    
 
     const adicionaObservacao = () => {
         navigate(`/ocorrencias/${ocorrenciaId}/observacoes/nova`);
