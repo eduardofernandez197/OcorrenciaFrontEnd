@@ -1,6 +1,6 @@
 import { Camera, Image, ImageIcon } from "lucide-react";
 import { TopBar } from "../../componentes/Components/TopBar";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useState } from "react";
 import {
     BotaoFoto,
@@ -19,29 +19,22 @@ import {
     ObservacaoNumero,
     ObservacaoTexto
 } from "./style";
+import { api } from "../../Services/api";
 
-type ObservacoesFormData = {
-    titulo: string;
-    descricao: string;
-    foto: File;
-}
 
-type ObservacoesFormProps = {
-    // Funcao recebida do App para enviar os dados preenchidos para o estado global temporario.
-    aoSalvar: (observacao: ObservacoesFormData) => void;
-}
-
-export const ObservacoesForm = ({ aoSalvar }: ObservacoesFormProps) => {
+export const ObservacoesForm = () => {
 
     // Estados controlam o que o usuario digita antes de salvar.
-    const [titulo, setTitulo] = useState("");
-    const [descricao, setDescricao] = useState("");
+    const [titulo, setTitulo] = useState<string>("");
+    const [descricao, setDescricao] = useState<string>("");
     // File quando existe foto selecionada; null quando nenhuma foto foi escolhida.
     const [foto, setFoto] = useState<File | null>(null);
 
     const navigate = useNavigate();
 
-    const SalvarObservacao = (event: React.FormEvent<HTMLFormElement>) => {
+    const { ocorrenciaId } = useParams();
+
+    const SalvarObservacao = async (event: React.FormEvent<HTMLFormElement>) => {
         // Mantem o controle do envio dentro do React.
         event.preventDefault();
 
@@ -61,15 +54,22 @@ export const ObservacoesForm = ({ aoSalvar }: ObservacoesFormProps) => {
               return;
         }
 
-        // Entrega titulo, descricao e foto para a funcao recebida do App.
-        aoSalvar({
-            titulo,
-            descricao,
-            foto,
-        })
+        const dadosObservacao = new FormData ();
 
-        navigate("/Observacoes");
-  };
+        dadosObservacao.append("titulo", titulo);
+        dadosObservacao.append("descricao", descricao);
+        dadosObservacao.append("imagens", foto);
+
+        try {
+            await api.post(`/ocorrencias/${ocorrenciaId}/observacoes`, dadosObservacao)
+
+            navigate(`/ocorrencias/${ocorrenciaId}/observacoes`);
+
+        } catch (error) {
+            console.error("Erro ao salvar observação:", error)
+        }
+
+    };
 
     return (
         <>

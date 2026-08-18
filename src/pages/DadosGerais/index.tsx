@@ -70,7 +70,7 @@ export const DadosGerais = () => {
       // Evita o recarregamento padrao do navegador ao enviar o formulario.
       event.preventDefault();
 
-      // O backend recebe multipart/form-data, por isso montamos um FormData.
+      // O backend recebe JSON, por isso montamos um JSON.
       const dadosGerais = {
         titulo: formValues.titulo,
         cliente: formValues.cliente,
