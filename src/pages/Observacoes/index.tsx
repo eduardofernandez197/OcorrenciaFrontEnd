@@ -63,7 +63,7 @@ export const Observacoes = () => {
     };
 
     const irParaPreVisualizacao = () => {
-        navigate("/PreVisualizacao");
+        navigate(`/ocorrencias/${ocorrenciaId}/pre-visualizacao`);
     };
 
     const formatarNumeroObservacao = (index: number) => {

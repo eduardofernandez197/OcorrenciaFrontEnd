@@ -51,10 +51,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/DadosGerais" element={<DadosGerais />}/>
-            <Route path="/ocorrencias/:ocorrenciaId/observacoes" element={<Observacoes observacoes={observacoes}/>}/>
+            <Route path="/ocorrencias/:ocorrenciaId/observacoes" element={<Observacoes/>}/>
             {/* Passa a funcao do App para o formulario salvar a observacao aqui. */}
-            <Route path="/ocorrencias/:ocorrenciaId/observacoes/nova" element={<ObservacoesForm aoSalvar={adicionarObservacao}/>}/>
-            <Route path="/PreVisualizacao" element={<PreVisualizacao />}/>
+            <Route path="/ocorrencias/:ocorrenciaId/observacoes/nova" element={<ObservacoesForm/>}/>
+            <Route path="/ocorrencias/:ocorrenciaId/pre-visualizacao" element={<PreVisualizacao />}/>
           </Routes>
         </BrowserRouter> 
     )
