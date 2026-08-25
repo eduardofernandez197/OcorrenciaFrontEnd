@@ -1,115 +1,218 @@
 import { TopBar } from "../../componentes/Components/TopBar";
-import { AcoesFooter, BotaoAcao, FotoFigure, HeaderContainer, HeaderIcone, HeaderTexto, InfoItem, NumeroFoto, ObservacaoContainer, ObservacaoDescricao, ObservacaoHeader, ObservacaoHeaderTexto, ObservacaoNumero, PreVisualizacaoContainer, RegistroFotografico, RegistroTitulo, RelatorioAssinaturaFooter, RelatorioCard, RelatorioCliente, RelatorioInfoGrid, RelatorioTipo, RelatorioTitulo, SectionInfContainer } from "./style";
+import {
+  AcoesFooter,
+  BotaoAcao,
+  FotoFigure,
+  HeaderContainer,
+  HeaderIcone,
+  HeaderTexto,
+  InfoItem,
+  NumeroFoto,
+  ObservacaoContainer,
+  ObservacaoDescricao,
+  ObservacaoHeader,
+  ObservacaoHeaderTexto,
+  ObservacaoNumero,
+  PreVisualizacaoContainer,
+  RegistroFotografico,
+  RegistroTitulo,
+  RelatorioAssinaturaFooter,
+  RelatorioCard,
+  RelatorioCliente,
+  RelatorioInfoGrid,
+  RelatorioTipo,
+  RelatorioTitulo,
+  SectionInfContainer,
+} from "./style";
 import { FileText } from "lucide-react";
 import imagemteste from "../../assets/imagens/imagemteste.png";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { api } from "../../Services/api";
+
+type DadosGerais = {
+  titulo: string;
+  cliente: string;
+  localizacao: string;
+  setor: string;
+  area: string;
+  departamento: string;
+  responsavel: string;
+  data_inspecao: string;
+  revisao: string;
+};
+
+type Observacao = {
+  id: number;
+  titulo: string;
+  descricao: string;
+  fotos?: string[];
+};
 
 export const PreVisualizacao = () => {
+  const [dadosGerais, setDadosGerais] = useState<DadosGerais>({
+    titulo: "",
+    cliente: "",
+    localizacao: "",
+    setor: "",
+    area: "",
+    departamento: "",
+    responsavel: "",
+    data_inspecao: "",
+    revisao: "Rev.00",
+  });
+
+  const [observacoes, setObservacoes] = useState<Observacao[]>([]);
+
+  const { ocorrenciaId } = useParams();
+
+  const formatarNumero = (numero: number) => {
+    return String(numero).padStart(2, "0");
+  };
+
+  useEffect(() => {
+    const buscarDadosGerais = async () => {
+      const responseDados = await api.get(`/ocorrencias/${ocorrenciaId}`);
+      const responseObservacoes = await api.get(
+        `/ocorrencias/${ocorrenciaId}/observacoes`
+      );
+
+      setDadosGerais(responseDados.data);
+      setObservacoes(responseObservacoes.data);
+    };
+
+    buscarDadosGerais();
+  }, [ocorrenciaId]);
+
   return (
     <>
-      <TopBar title="Pré-visualização" ButtomVoltar />
+      <TopBar title="Pre-visualizacao" ButtomVoltar />
 
-      <PreVisualizacaoContainer aria-label="Pré-visualização do relatório">
-        <section aria-label="Resumo do relatório">
+      <PreVisualizacaoContainer aria-label="Pre-visualizacao do relatorio">
+        <section aria-label="Resumo do relatorio">
           <RelatorioCard>
             <HeaderContainer>
               <HeaderIcone>
-                <FileText size={16}/>
+                <FileText size={16} />
               </HeaderIcone>
 
               <HeaderTexto>
                 <strong>TechReport</strong>
-                <p>Relatório Técnico</p>
+                <p>Relatorio Tecnico</p>
               </HeaderTexto>
             </HeaderContainer>
 
             <SectionInfContainer>
-              <RelatorioTipo>RELATÓRIO TÉCNICO DE INSPEÇÃO</RelatorioTipo>
-              <RelatorioTitulo>RT-2024-042 – Inspeção Elétrica Bloco A</RelatorioTitulo>
-              <RelatorioCliente>Construtora Ômega Ltda.</RelatorioCliente>
+              <RelatorioTipo>RELATORIO TECNICO DE INSPECAO</RelatorioTipo>
+              <RelatorioTitulo>{dadosGerais.titulo}</RelatorioTitulo>
+              <RelatorioCliente>{dadosGerais.cliente}</RelatorioCliente>
             </SectionInfContainer>
 
-            <RelatorioInfoGrid aria-label="Informações gerais">
+            <RelatorioInfoGrid aria-label="Informacoes gerais">
               <InfoItem className="span-3">
-                <span>LOCALIZAÇÃO</span>
-                <strong>Rua das Flores, 240 – São Paulo</strong>
+                <span>LOCALIZACAO</span>
+                <strong>{dadosGerais.localizacao}</strong>
               </InfoItem>
 
               <InfoItem className="span-3">
-                <span>RESPONSÁVEL</span>
-                <strong>Eng. Neto Silva</strong>
+                <span>RESPONSAVEL</span>
+                <strong>{dadosGerais.responsavel}</strong>
               </InfoItem>
 
               <InfoItem className="span-3">
                 <span>DATA</span>
-                <strong>15/11/2024</strong>
+                <strong>{dadosGerais.data_inspecao}</strong>
               </InfoItem>
 
               <InfoItem className="span-3">
-                <span>REVISÃO</span>
-                <strong>Rev.01</strong>
+                <span>REVISAO</span>
+                <strong>{dadosGerais.revisao}</strong>
               </InfoItem>
 
               <InfoItem className="span-2">
-                <span >SETOR</span>
-                <strong>Elétrico</strong>
+                <span>SETOR</span>
+                <strong>{dadosGerais.setor}</strong>
               </InfoItem>
 
               <InfoItem className="span-2">
-                <span>ÁREA</span>
-                <strong>Área Comum</strong>
+                <span>AREA</span>
+                <strong>{dadosGerais.area}</strong>
               </InfoItem>
 
               <InfoItem className="span-2">
                 <span>DEPTO.</span>
-                <strong>Manutenção</strong>
+                <strong>{dadosGerais.departamento}</strong>
               </InfoItem>
             </RelatorioInfoGrid>
           </RelatorioCard>
         </section>
 
-        <section aria-label="Observações do relatório">
-          <ObservacaoContainer>
-            <ObservacaoHeader>
-              <ObservacaoNumero>01</ObservacaoNumero>
+        <section aria-label="Observacoes do relatorio">
+          {observacoes.map((observacao, observacaoIndex) => {
+            const numeroObservacao = formatarNumero(observacaoIndex + 1);
 
-              <ObservacaoHeaderTexto>
-                <strong>OBSERVAÇÃO 01</strong>
-                <h2>Quadro de distribuição</h2>
-              </ObservacaoHeaderTexto>
-            </ObservacaoHeader>
+            return (
+              <ObservacaoContainer key={observacao.id}>
+                <ObservacaoHeader>
+                  <ObservacaoNumero>{numeroObservacao}</ObservacaoNumero>
 
-            <ObservacaoDescricao>
-              <h3>OBSERVAÇÕES</h3>
-              <p>Quadro com ferrugem avançada na tampa.</p>
-            </ObservacaoDescricao>
+                  <ObservacaoHeaderTexto>
+                    <strong>OBSERVACAO {numeroObservacao}</strong>
+                    <h2>{observacao.titulo}</h2>
+                  </ObservacaoHeaderTexto>
+                </ObservacaoHeader>
 
-            <RegistroFotografico>
-              <RegistroTitulo>
-                 <h3>REGISTRO FOTOGRÁFICO</h3>
-                 <strong>— OBSERVAÇÃO 01</strong>
-              </RegistroTitulo>
+                <ObservacaoDescricao>
+                  <h3>OBSERVACOES</h3>
+                  <p>{observacao.descricao}</p>
+                </ObservacaoDescricao>
 
-              <FotoFigure>
-                <NumeroFoto>Foto 01</NumeroFoto>
-                <img src={imagemteste} alt="Registro fotográfico da observação 01" />
-              </FotoFigure>
-            </RegistroFotografico>
-          </ObservacaoContainer>
+                <RegistroFotografico>
+                  <RegistroTitulo>
+                    <h3>REGISTRO FOTOGRAFICO</h3>
+                    <strong>- OBSERVACAO {numeroObservacao}</strong>
+                  </RegistroTitulo>
+
+                  {observacao.fotos && observacao.fotos.length > 0 ? (
+                    observacao.fotos.map((foto, fotoIndex) => (
+                      <FotoFigure key={fotoIndex}>
+                        <NumeroFoto>
+                          Foto {formatarNumero(fotoIndex + 1)}
+                        </NumeroFoto>
+                        <img
+                          src={`http://localhost:8080/arquivos/${foto.replace("ocorrencias/", "")}`}
+                          alt={`Registro fotografico da observacao ${numeroObservacao}`}
+                        />
+                      </FotoFigure>
+                    ))
+                  ) : (
+                    <FotoFigure>
+                      <NumeroFoto>Foto 01</NumeroFoto>
+                      <img
+                        src={imagemteste}
+                        alt={`Registro fotografico da observacao ${numeroObservacao}`}
+                      />
+                    </FotoFigure>
+                  )}
+                </RegistroFotografico>
+              </ObservacaoContainer>
+            );
+          })}
         </section>
 
-        <RelatorioAssinaturaFooter aria-label="Informações do relatório">
-          <span>TechReport · 04/07/2026</span>
+        <RelatorioAssinaturaFooter aria-label="Informacoes do relatorio">
+          <span>TechReport - 04/07/2026</span>
           <strong>Eng. Neto Silva</strong>
         </RelatorioAssinaturaFooter>
 
-        <AcoesFooter aria-label="Ações do relatório">
+        <AcoesFooter aria-label="Acoes do relatorio">
           <BotaoAcao className="documento" type="button">
             Gerar Documento
           </BotaoAcao>
 
           <BotaoAcao className="email" type="button">
             Enviar E-mail
-          </BotaoAcao>                    
+          </BotaoAcao>
         </AcoesFooter>
       </PreVisualizacaoContainer>
     </>
