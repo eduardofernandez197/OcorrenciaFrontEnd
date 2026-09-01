@@ -1,7 +1,7 @@
 import { Camera, Image, ImageIcon } from "lucide-react";
 import { TopBar } from "../../componentes/Components/TopBar";
 import { useNavigate, useParams } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     BotaoFoto,
     BotaoSalvarObservacao,
@@ -32,7 +32,8 @@ export const ObservacoesForm = () => {
 
     const navigate = useNavigate();
 
-    const { ocorrenciaId } = useParams();
+    const { ocorrenciaId, observacaoId } = useParams();
+    const estaEditando = Boolean(observacaoId);
 
     const tiposPermitidos = ["image/jpeg", "image/png"];
 
@@ -47,22 +48,37 @@ export const ObservacoesForm = () => {
         return true;
     };
 
+    useEffect(() => {
+        const buscarObservacao = async () => {
+            if (!observacaoId) {
+                return;
+            }
+
+            const response = await api.get(`/ocorrencias/${ocorrenciaId}/observacoes/${observacaoId}`);
+
+            setTitulo(response.data.titulo);
+            setDescricao(response.data.descricao);
+        };
+
+        buscarObservacao();
+    }, [ocorrenciaId, observacaoId]);
+
     const SalvarObservacao = async (event: React.FormEvent<HTMLFormElement>) => {
         // Mantem o controle do envio dentro do React.
         event.preventDefault();
 
         // Validacoes simples antes de enviar para o App/backend.
-        if (!titulo.trim()) {
+        if (!estaEditando && !titulo.trim()) {
             alert("Informe o título da observação.");
             return;
         }
 
-        if (!descricao.trim()) {
+        if (!estaEditando && !descricao.trim()) {
             alert("Informe a descrição da observação.");
             return;
         }
 
-        if (fotos.length === 0) {
+        if (!estaEditando && fotos.length === 0) {
             alert("Adicione uma foto.");
               return;
         }
@@ -76,7 +92,11 @@ export const ObservacoesForm = () => {
         });
 
         try {
-            await api.post(`/ocorrencias/${ocorrenciaId}/observacoes`, dadosObservacao)
+            if (estaEditando) {
+                await api.put(`/ocorrencias/${ocorrenciaId}/observacoes/${observacaoId}`, dadosObservacao)
+            } else {
+                await api.post(`/ocorrencias/${ocorrenciaId}/observacoes`, dadosObservacao)
+            }
 
             navigate(`/ocorrencias/${ocorrenciaId}/observacoes`);
 
@@ -114,7 +134,7 @@ export const ObservacoesForm = () => {
                             name="tituloObservacao"
                             type="text"
                             placeholder="Ex: Quadro de distribuição com ferrugem"
-                            required
+                            required={!estaEditando}
                         />
                     </CampoContainer>
 

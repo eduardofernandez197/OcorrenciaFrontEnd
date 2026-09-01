@@ -66,6 +66,10 @@ export const Observacoes = () => {
         navigate(`/ocorrencias/${ocorrenciaId}/pre-visualizacao`);
     };
 
+    const editarObservacao = (observacaoId: number) => {
+        navigate(`/ocorrencias/${ocorrenciaId}/observacoes/${observacaoId}/editar`);
+    };
+
     const formatarNumeroObservacao = (index: number) => {
         return String(index + 1).padStart(2, "0");
     };
@@ -119,7 +123,7 @@ export const Observacoes = () => {
                         </ObservacaoCardHeader>
 
                         <ObservacaoAcoes>
-                            <EditarButton type="button">
+                            <EditarButton type="button" onClick={() => editarObservacao(observacao.id)}>
                                 <Pencil size={14} strokeWidth={2} />
                                 <span>Editar</span>
                             </EditarButton>

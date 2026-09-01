@@ -5,46 +5,8 @@ import { Observacoes } from './pages/Observacoes';
 import { ObservacoesForm } from './pages/ObservacoesForm';
 import { PreVisualizacao } from './pages/PreVisualizacao';
 import { BrowserRouter, Routes, Route } from 'react-router';
-import { useState } from 'react';
-
-// Observacao ja salva: tem id para identificar/renderizar depois.
-type Observacao = {
-  id: number;
-  titulo: string;
-  descricao: string;
-  foto: File;
-};
-
-// NovaObservacao vem do formulario: ainda nao tem id.
-type NovaObservacao = {
-  titulo: string;
-  descricao: string;
-  foto: File;
-};
 
 function App() {
-
-    // Lista temporaria de observacoes enquanto ainda nao temos backend.
-    // A tela Observacoes recebe essa lista por props para renderizar os cards.
-    const [observacoes, setObservacoes] = useState<Observacao[]>([]);
-    
-    // Funcao que o formulario chama para entregar uma nova observacao ao App.
-    const adicionarObservacao = (novaObservacao:NovaObservacao) => {
-      // O formulario envia titulo, descricao e foto; aqui adicionamos o id.
-      const observacaoComId = {
-        id: Date.now(),
-        ...novaObservacao,
-      };
-
-      // observacoesAtuais e preenchido pelo React com o valor atual do estado.
-      // O spread mantem as observacoes antigas e adiciona a nova no final.
-      setObservacoes((observacoesAtuais) => [
-        ...observacoesAtuais,
-        observacaoComId,
-      ])
-
-      console.log(observacoes)
-    }
 
     return(
         <BrowserRouter>
@@ -52,8 +14,8 @@ function App() {
             <Route path="/" element={<Home />}/>
             <Route path="/DadosGerais" element={<DadosGerais />}/>
             <Route path="/ocorrencias/:ocorrenciaId/observacoes" element={<Observacoes/>}/>
-            {/* Passa a funcao do App para o formulario salvar a observacao aqui. */}
             <Route path="/ocorrencias/:ocorrenciaId/observacoes/nova" element={<ObservacoesForm/>}/>
+            <Route path="/ocorrencias/:ocorrenciaId/observacoes/:observacaoId/editar" element={<ObservacoesForm/>}/>
             <Route path="/ocorrencias/:ocorrenciaId/pre-visualizacao" element={<PreVisualizacao />}/>
           </Routes>
         </BrowserRouter> 
