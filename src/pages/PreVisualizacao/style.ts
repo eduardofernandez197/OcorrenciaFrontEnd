@@ -148,6 +148,12 @@ export const ObservacaoContainer = styled.article`
   flex-direction: column;
 `;
 
+export const ObservacoesLista = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
 export const ObservacaoHeader = styled.header`
   display: flex;
   align-items: center;
@@ -277,6 +283,19 @@ export const NumeroFoto = styled.span`
   font-size: 11px;
   font-weight: 700;
   line-height: 1;
+`;
+
+export const FotoIndisponivel = styled.span`
+  width: 100%;
+  height: 100%;
+
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const RelatorioAssinaturaFooter = styled.footer`

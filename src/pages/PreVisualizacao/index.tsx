@@ -3,6 +3,7 @@ import {
   AcoesFooter,
   BotaoAcao,
   FotoFigure,
+  FotoIndisponivel,
   HeaderContainer,
   HeaderIcone,
   HeaderTexto,
@@ -13,6 +14,7 @@ import {
   ObservacaoHeader,
   ObservacaoHeaderTexto,
   ObservacaoNumero,
+  ObservacoesLista,
   PreVisualizacaoContainer,
   RegistroFotografico,
   RegistroTitulo,
@@ -25,7 +27,6 @@ import {
   SectionInfContainer,
 } from "./style";
 import { FileText } from "lucide-react";
-import imagemteste from "../../assets/imagens/imagemteste.png";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { api } from "../../Services/api";
@@ -147,7 +148,7 @@ export const PreVisualizacao = () => {
           </RelatorioCard>
         </section>
 
-        <section aria-label="Observacoes do relatorio">
+        <ObservacoesLista aria-label="Observacoes do relatorio">
           {observacoes.map((observacao, observacaoIndex) => {
             const numeroObservacao = formatarNumero(observacaoIndex + 1);
 
@@ -188,21 +189,18 @@ export const PreVisualizacao = () => {
                   ) : (
                     <FotoFigure>
                       <NumeroFoto>Foto 01</NumeroFoto>
-                      <img
-                        src={imagemteste}
-                        alt={`Registro fotografico da observacao ${numeroObservacao}`}
-                      />
+                      <FotoIndisponivel>Imagem nao disponivel</FotoIndisponivel>
                     </FotoFigure>
                   )}
                 </RegistroFotografico>
               </ObservacaoContainer>
             );
           })}
-        </section>
+        </ObservacoesLista>
 
         <RelatorioAssinaturaFooter aria-label="Informacoes do relatorio">
-          <span>TechReport - 04/07/2026</span>
-          <strong>Eng. Neto Silva</strong>
+          <span>TechReport - {dadosGerais.data_inspecao}</span>
+          <strong>{dadosGerais.responsavel}</strong>
         </RelatorioAssinaturaFooter>
 
         <AcoesFooter aria-label="Acoes do relatorio">

@@ -27,12 +27,25 @@ export const ObservacoesForm = () => {
     // Estados controlam o que o usuario digita antes de salvar.
     const [titulo, setTitulo] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
-    // File quando existe foto selecionada; null quando nenhuma foto foi escolhida.
-    const [foto, setFoto] = useState<File | null>(null);
+    // Lista de fotos selecionadas para enviar no FormData.
+    const [fotos, setFotos] = useState<File[]>([]);
 
     const navigate = useNavigate();
 
     const { ocorrenciaId } = useParams();
+
+    const tiposPermitidos = ["image/jpeg", "image/png"];
+
+    const validarFotosSelecionadas = (arquivos: File[]) => {
+        const possuiArquivoInvalido = arquivos.some((arquivo) => !tiposPermitidos.includes(arquivo.type));
+
+        if (possuiArquivoInvalido) {
+            alert("Envie apenas imagens JPG ou PNG.");
+            return false;
+        }
+
+        return true;
+    };
 
     const SalvarObservacao = async (event: React.FormEvent<HTMLFormElement>) => {
         // Mantem o controle do envio dentro do React.
@@ -49,7 +62,7 @@ export const ObservacoesForm = () => {
             return;
         }
 
-        if (!foto) {
+        if (fotos.length === 0) {
             alert("Adicione uma foto.");
               return;
         }
@@ -58,7 +71,9 @@ export const ObservacoesForm = () => {
 
         dadosObservacao.append("titulo", titulo);
         dadosObservacao.append("descricao", descricao);
-        dadosObservacao.append("imagens", foto);
+        fotos.forEach((foto) => {
+            dadosObservacao.append("imagens", foto);
+        });
 
         try {
             await api.post(`/ocorrencias/${ocorrenciaId}/observacoes`, dadosObservacao)
@@ -128,13 +143,17 @@ export const ObservacoesForm = () => {
                           <input
                             id="fotoCamera"
                             type="file"
-                            accept="image/*"
+                            accept="image/jpeg,image/png"
                             capture="environment"
                             hidden
                             onChange={(event) => {
-                              // Pega a primeira foto selecionada; se nao tiver foto, salva null.
-                              const arquivo = event.target.files?.[0] ?? null;
-                              setFoto(arquivo);
+                              const arquivos = Array.from(event.target.files ?? []);
+                              if (!validarFotosSelecionadas(arquivos)) {
+                                event.target.value = "";
+                                return;
+                              }
+                              setFotos((fotosAtuais) => [...fotosAtuais, ...arquivos]);
+                              event.target.value = "";
                             }}
                           />
 
@@ -148,12 +167,17 @@ export const ObservacoesForm = () => {
                           <input
                             id="fotoGaleria"
                             type="file"
-                            accept="image/*"
+                            accept="image/jpeg,image/png"
+                            multiple
                             hidden
                             onChange={(event) => {
-                              // Pega a primeira imagem selecionada; se nao tiver imagem, salva null.
-                              const arquivo = event.target.files?.[0] ?? null;
-                              setFoto(arquivo);
+                              const arquivos = Array.from(event.target.files ?? []);
+                              if (!validarFotosSelecionadas(arquivos)) {
+                                event.target.value = "";
+                                return;
+                              }
+                              setFotos((fotosAtuais) => [...fotosAtuais, ...arquivos]);
+                              event.target.value = "";
                             }}
                           />
 

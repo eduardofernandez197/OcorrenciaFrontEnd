@@ -38,7 +38,7 @@ type Observacao = {
     id: number;
     titulo: string;
     descricao: string;
-    foto: File;
+    fotos?: string[];
 }
 
 export const Observacoes = () => {
@@ -100,7 +100,11 @@ export const Observacoes = () => {
                   </ObservacoesVazioContainer>
                 ) : (
                   <ListaObservacoes>
-                    {observacoes.map((observacao, index) => (
+                    {observacoes.map((observacao, index) => {
+                      const quantidadeFotos = observacao.fotos?.length ?? 0;
+                      const textoFotos = quantidadeFotos === 1 ? "foto" : "fotos";
+
+                      return (
                       <ObservacaoCard key={observacao.id}>
                         <ObservacaoCardHeader>
                             <ObservacaoNumero>{formatarNumeroObservacao(index)}</ObservacaoNumero>
@@ -110,7 +114,7 @@ export const Observacoes = () => {
                                 <StatusCompleto>Completo</StatusCompleto>
                                 <strong>{observacao.titulo}</strong>
                                 <p>{observacao.descricao}</p>
-                                <ObservacaoMeta>1 foto</ObservacaoMeta>
+                                <ObservacaoMeta>{quantidadeFotos} {textoFotos}</ObservacaoMeta>
                             </ObservacaoConteudo>
                         </ObservacaoCardHeader>
 
@@ -125,7 +129,8 @@ export const Observacoes = () => {
                             </ExcluirButton>
                         </ObservacaoAcoes>
                       </ObservacaoCard>
-                    ))}
+                      );
+                    })}
                   </ListaObservacoes>
                 )}  
 
