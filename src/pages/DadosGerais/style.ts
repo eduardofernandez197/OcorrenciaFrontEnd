@@ -116,7 +116,7 @@ export const CampoInput = styled.input`
   background-color: #ffffff;
 
   color: #111827;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 // Rodapé de ação do formulário.

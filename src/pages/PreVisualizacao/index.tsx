@@ -1,9 +1,11 @@
 import { TopBar } from "../../componentes/Components/TopBar";
+import { FotoModal } from "../../componentes/Components/FotoModal";
 import {
   AcoesFooter,
   BotaoAcao,
   FotoFigure,
   FotoIndisponivel,
+  FotosRelatorioGrid,
   HeaderContainer,
   HeaderIcone,
   HeaderTexto,
@@ -64,6 +66,7 @@ export const PreVisualizacao = () => {
   });
 
   const [observacoes, setObservacoes] = useState<Observacao[]>([]);
+  const [fotoModal, setFotoModal] = useState<{ url: string; titulo: string } | null>(null);
 
   const { ocorrenciaId } = useParams();
 
@@ -175,22 +178,34 @@ export const PreVisualizacao = () => {
                   </RegistroTitulo>
 
                   {observacao.fotos && observacao.fotos.length > 0 ? (
-                    observacao.fotos.map((foto, fotoIndex) => (
-                      <FotoFigure key={fotoIndex}>
-                        <NumeroFoto>
-                          Foto {formatarNumero(fotoIndex + 1)}
-                        </NumeroFoto>
-                        <img
-                          src={`http://localhost:8080/arquivos/${foto.replace("ocorrencias/", "")}`}
-                          alt={`Registro fotografico da observacao ${numeroObservacao}`}
-                        />
-                      </FotoFigure>
-                    ))
+                    <FotosRelatorioGrid>
+                      {observacao.fotos.map((foto, fotoIndex) => (
+                        <FotoFigure
+                          key={fotoIndex}
+                          onClick={() =>
+                            setFotoModal({
+                              url: `http://localhost:8080/arquivos/${foto.replace("ocorrencias/", "")}`,
+                              titulo: `Foto ${formatarNumero(fotoIndex + 1)}`,
+                            })
+                          }
+                        >
+                          <NumeroFoto>
+                            Foto {formatarNumero(fotoIndex + 1)}
+                          </NumeroFoto>
+                          <img
+                            src={`http://localhost:8080/arquivos/${foto.replace("ocorrencias/", "")}`}
+                            alt={`Registro fotografico da observacao ${numeroObservacao}`}
+                          />
+                        </FotoFigure>
+                      ))}
+                    </FotosRelatorioGrid>
                   ) : (
-                    <FotoFigure>
-                      <NumeroFoto>Foto 01</NumeroFoto>
-                      <FotoIndisponivel>Imagem nao disponivel</FotoIndisponivel>
-                    </FotoFigure>
+                    <FotosRelatorioGrid>
+                      <FotoFigure>
+                        <NumeroFoto>Foto 01</NumeroFoto>
+                        <FotoIndisponivel>Imagem nao disponivel</FotoIndisponivel>
+                      </FotoFigure>
+                    </FotosRelatorioGrid>
                   )}
                 </RegistroFotografico>
               </ObservacaoContainer>
@@ -212,6 +227,14 @@ export const PreVisualizacao = () => {
             Enviar E-mail
           </BotaoAcao>
         </AcoesFooter>
+
+        {fotoModal && (
+          <FotoModal
+            fotoUrl={fotoModal.url}
+            titulo={fotoModal.titulo}
+            onFechar={() => setFotoModal(null)}
+          />
+        )}
       </PreVisualizacaoContainer>
     </>
   );

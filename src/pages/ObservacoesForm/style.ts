@@ -38,7 +38,7 @@ export const ObservacaoNumero = styled.strong`
   align-items: center;
   justify-content: center;
 
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 800;
 `;
 
@@ -103,7 +103,7 @@ export const CampoInput = styled.input`
   background-color: #ffffff;
 
   color: #111827;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
 
   &::placeholder {
@@ -122,7 +122,7 @@ export const CampoTextarea = styled.textarea`
   background-color: #ffffff;
 
   color: #111827;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
   resize: none;
@@ -184,6 +184,89 @@ export const BotaoFoto = styled.label<{ $active?: boolean }>`
   cursor: pointer;
 `;
 
+export const FotosPreviewContainer = styled.div`
+  padding: 12px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background-color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const FotosPreviewTitulo = styled.strong`
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+`;
+
+// Lista das fotos escolhidas antes de salvar a observacao.
+export const FotosPreviewLista = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+`;
+
+export const FotoPreviewCard = styled.figure`
+  position: relative;
+  width: 100%;
+  padding: 6px;
+  margin: 0;
+  overflow: hidden;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+`;
+
+export const FotoPreviewLegenda = styled.span`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+
+  padding: 4px 8px;
+  border-radius: 999px;
+  background-color: #111827;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 700;
+`;
+
+export const FotoPreviewImagem = styled.img`
+  display: block;
+  width: 100%;
+  height: 118px;
+  border-radius: 9px;
+  object-fit: cover;
+`;
+
+export const FotoExcluirButton = styled.button`
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  z-index: 1;
+
+  width: 28px;
+  height: 28px;
+
+  border: none;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #ef4444;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+`;
+
 // Rodape do formulario com a acao principal.
 export const FormularioFooter = styled.footer`
   margin-top: auto;
@@ -197,7 +280,7 @@ export const BotaoSalvarObservacao = styled.button`
 
   border: none;
   border-radius: 14px;
-  background-color: #ffc199;
+  background-color: #ff6b00;
   color: #ffffff;
 
   font-size: 16px;

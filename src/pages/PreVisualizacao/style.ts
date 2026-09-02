@@ -248,22 +248,31 @@ export const RegistroTitulo = styled.div`
   }
 `;
 
+export const FotosRelatorioGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+`;
+
 export const FotoFigure = styled.figure`
   position: relative;
 
   width: 100%;
-  height: 150px;
+  padding: 6px;
   margin: 0;
 
-  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
   overflow: hidden;
-  background-color: #e5e7eb;
+  background-color: #f8fafc;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
 
   img {
     width: 100%;
-    height: 100%;
+    height: 118px;
 
     display: block;
+    border-radius: 9px;
     object-fit: cover;
   }
 `;

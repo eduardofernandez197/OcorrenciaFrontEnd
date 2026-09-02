@@ -1,7 +1,8 @@
-import { Camera, Image, ImageIcon } from "lucide-react";
+import { Camera, Image, ImageIcon, Trash2 } from "lucide-react";
 import { TopBar } from "../../componentes/Components/TopBar";
+import { FotoModal } from "../../componentes/Components/FotoModal";
 import { useNavigate, useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
     BotaoFoto,
     BotaoSalvarObservacao,
@@ -13,6 +14,13 @@ import {
     FormularioObservacao,
     FotosAcoes,
     FotosContainer,
+    FotoExcluirButton,
+    FotoPreviewCard,
+    FotosPreviewContainer,
+    FotoPreviewImagem,
+    FotoPreviewLegenda,
+    FotosPreviewLista,
+    FotosPreviewTitulo,
     FotosTitulo,
     ObservacaoCard,
     ObservacaoContainer,
@@ -29,11 +37,20 @@ export const ObservacoesForm = () => {
     const [descricao, setDescricao] = useState<string>("");
     // Lista de fotos selecionadas para enviar no FormData.
     const [fotos, setFotos] = useState<File[]>([]);
+    const [fotosSalvas, setFotosSalvas] = useState<string[]>([]);
+    const [fotoModal, setFotoModal] = useState<{ url: string; titulo: string } | null>(null);
 
     const navigate = useNavigate();
 
     const { ocorrenciaId, observacaoId } = useParams();
     const estaEditando = Boolean(observacaoId);
+
+    const fotosPreview = useMemo(() => {
+        return fotos.map((foto) => ({
+            nome: foto.name,
+            url: URL.createObjectURL(foto),
+        }));
+    }, [fotos]);
 
     const tiposPermitidos = ["image/jpeg", "image/png"];
 
@@ -58,10 +75,17 @@ export const ObservacoesForm = () => {
 
             setTitulo(response.data.titulo);
             setDescricao(response.data.descricao);
+            setFotosSalvas(response.data.fotos ?? []);
         };
 
         buscarObservacao();
     }, [ocorrenciaId, observacaoId]);
+
+    useEffect(() => {
+        return () => {
+            fotosPreview.forEach((foto) => URL.revokeObjectURL(foto.url));
+        };
+    }, [fotosPreview]);
 
     const SalvarObservacao = async (event: React.FormEvent<HTMLFormElement>) => {
         // Mantem o controle do envio dentro do React.
@@ -207,6 +231,69 @@ export const ObservacoesForm = () => {
                             <span>Da Galeria</span>
                           </BotaoFoto>
                         </FotosAcoes>
+
+                        {fotosSalvas.length > 0 && (
+                            <FotosPreviewContainer>
+                                <FotosPreviewTitulo>Fotos adicionadas</FotosPreviewTitulo>
+
+                                <FotosPreviewLista>
+                                    {fotosSalvas.map((foto, index) => (
+                                        <FotoPreviewCard
+                                            key={`${foto}-${index}`}
+                                            onClick={() =>
+                                                setFotoModal({
+                                                    url: `http://localhost:8080/arquivos/${foto.replace("ocorrencias/", "")}`,
+                                                    titulo: `Foto ${String(index + 1).padStart(2, "0")}`,
+                                                })
+                                            }
+                                        >
+                                            <FotoPreviewLegenda>
+                                                Foto {String(index + 1).padStart(2, "0")}
+                                            </FotoPreviewLegenda>
+
+                                            <FotoExcluirButton type="button" aria-label={`Excluir foto salva ${index + 1}`} onClick={(event) => event.stopPropagation()}>
+                                                <Trash2 size={14} strokeWidth={2} />
+                                            </FotoExcluirButton>
+
+                                            <FotoPreviewImagem
+                                                src={`http://localhost:8080/arquivos/${foto.replace("ocorrencias/", "")}`}
+                                                alt={`Foto salva ${index + 1}`}
+                                            />
+                                        </FotoPreviewCard>
+                                    ))}
+                                </FotosPreviewLista>
+                            </FotosPreviewContainer>
+                        )}
+
+                        {fotosPreview.length > 0 && (
+                            <FotosPreviewContainer>
+                                <FotosPreviewTitulo>Fotos adicionadas</FotosPreviewTitulo>
+
+                                <FotosPreviewLista>
+                                    {fotosPreview.map((foto, index) => (
+                                        <FotoPreviewCard
+                                            key={`${foto.nome}-${index}`}
+                                            onClick={() =>
+                                                setFotoModal({
+                                                    url: foto.url,
+                                                    titulo: `Foto ${String(index + 1).padStart(2, "0")}`,
+                                                })
+                                            }
+                                        >
+                                            <FotoPreviewLegenda>
+                                                Foto {String(index + 1).padStart(2, "0")}
+                                            </FotoPreviewLegenda>
+
+                                            <FotoExcluirButton type="button" aria-label={`Excluir foto ${index + 1}`} onClick={(event) => event.stopPropagation()}>
+                                                <Trash2 size={14} strokeWidth={2} />
+                                            </FotoExcluirButton>
+
+                                            <FotoPreviewImagem src={foto.url} alt={`Preview da foto ${index + 1}`} />
+                                        </FotoPreviewCard>
+                                    ))}
+                                </FotosPreviewLista>
+                            </FotosPreviewContainer>
+                        )}
                     </FotosContainer>
 
                     {/* Ação final do formulário. */}
@@ -217,6 +304,14 @@ export const ObservacoesForm = () => {
                     </FormularioFooter>
                 </FormularioObservacao>
             </ObservacaoContainer>
+
+            {fotoModal && (
+                <FotoModal
+                    fotoUrl={fotoModal.url}
+                    titulo={fotoModal.titulo}
+                    onFechar={() => setFotoModal(null)}
+                />
+            )}
         </>
     )
 }
