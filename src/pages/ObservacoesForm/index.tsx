@@ -232,7 +232,7 @@ export const ObservacoesForm = () => {
                           </BotaoFoto>
                         </FotosAcoes>
 
-                        {fotosSalvas.length > 0 && (
+                        {(fotosSalvas.length > 0 || fotosPreview.length > 0) && (
                             <FotosPreviewContainer>
                                 <FotosPreviewTitulo>Fotos adicionadas</FotosPreviewTitulo>
 
@@ -261,34 +261,25 @@ export const ObservacoesForm = () => {
                                             />
                                         </FotoPreviewCard>
                                     ))}
-                                </FotosPreviewLista>
-                            </FotosPreviewContainer>
-                        )}
-
-                        {fotosPreview.length > 0 && (
-                            <FotosPreviewContainer>
-                                <FotosPreviewTitulo>Fotos adicionadas</FotosPreviewTitulo>
-
-                                <FotosPreviewLista>
                                     {fotosPreview.map((foto, index) => (
                                         <FotoPreviewCard
                                             key={`${foto.nome}-${index}`}
                                             onClick={() =>
                                                 setFotoModal({
                                                     url: foto.url,
-                                                    titulo: `Foto ${String(index + 1).padStart(2, "0")}`,
+                                                    titulo: `Foto ${String(fotosSalvas.length + index + 1).padStart(2, "0")}`,
                                                 })
                                             }
                                         >
                                             <FotoPreviewLegenda>
-                                                Foto {String(index + 1).padStart(2, "0")}
+                                                Foto {String(fotosSalvas.length + index + 1).padStart(2, "0")}
                                             </FotoPreviewLegenda>
 
-                                            <FotoExcluirButton type="button" aria-label={`Excluir foto ${index + 1}`} onClick={(event) => event.stopPropagation()}>
+                                            <FotoExcluirButton type="button" aria-label={`Excluir foto ${fotosSalvas.length + index + 1}`} onClick={(event) => event.stopPropagation()}>
                                                 <Trash2 size={14} strokeWidth={2} />
                                             </FotoExcluirButton>
 
-                                            <FotoPreviewImagem src={foto.url} alt={`Preview da foto ${index + 1}`} />
+                                            <FotoPreviewImagem src={foto.url} alt={`Preview da foto ${fotosSalvas.length + index + 1}`} />
                                         </FotoPreviewCard>
                                     ))}
                                 </FotosPreviewLista>
